@@ -151,10 +151,7 @@ namespace libperspesk {
 	extern void PushClip(RenderingContext*ctx, SkRect*rect)
 	{
 		ctx->Canvas->save();
-		SkRegion rgn;
-		rgn.setRect((int)rect->left(), (int)rect->top(), (int)rect->right(), (int)rect->bottom());
-		ctx->Canvas->setClipRegion(rgn);
-
+		ctx->Canvas->clipRect(*rect);
 	}
 
 	extern void PopClip(RenderingContext*ctx)
