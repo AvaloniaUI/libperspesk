@@ -109,7 +109,7 @@ namespace libperspesk
 					if (constraint > MAX_LINE_WIDTH)
 						constraint = MAX_LINE_WIDTH;
 					
-					measured = Paint.breakText(&Data[curOff], (Length - curOff) * 2, Shared.WidthConstraint, &lineWidth) / 2;
+					measured = Paint.breakText(&Data[curOff], (Length - curOff) * 2, constraint, &lineWidth) / 2;
 					if (measured == 0)
 					{
 						measured = 1;
@@ -145,14 +145,21 @@ namespace libperspesk
 				
 				if (line.Width < 0)
 					line.Width = Rects[line.Start + line.Length - 1].fRight;
-				Paint.getTextWidths(&Data[line.Start], (line.Length * 2), nullptr, &Rects[line.Start]);
+				
 
 				//Build character rects
 				for (int c = line.Start; c < line.Start + line.Length; c++)
 				{
-					SkRect rc = Rects[c];
+					float prevRight = 0;
+					if (c != line.Start)
+						prevRight = Rects[c-1].fRight;
 					float w= Paint.measureText(&Data[line.Start], (c - line.Start + 1) * 2);
-					rc.offset(w - rc.fRight, line.Top + LineOffset);
+					
+					SkRect rc;
+					rc.fLeft = prevRight;
+					rc.fRight = w;
+					rc.fTop = line.Top;
+					rc.fBottom = line.Top + line.Height;
 					Rects[c] = rc;
 
 				}
