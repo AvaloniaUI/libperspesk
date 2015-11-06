@@ -116,7 +116,7 @@ namespace libperspesk
 						lineWidth = -1;
 					}
 
-					pchar nextChar = 1;
+					pchar nextChar = ' ';
 					if (curOff + measured < Length)
 						nextChar = Data[curOff + measured];
 					if (nextChar != ' ')
