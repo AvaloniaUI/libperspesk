@@ -8,11 +8,8 @@ namespace libperspesk
 		for (int c = 0; c < count; c++)
 		{
 			PerspexGeometryElement& el = elements[c];
-			if (el.Type == PerspexGeometryElementType::pgArcTo)
-			{
-				float radius = el.Points[2].fX;
-				rv->arcTo(el.Points[0], el.Points[1], radius);
-			}
+			if (el.Type == PerspexGeometryElementType::pgQuadTo)
+				rv->quadTo(el.Points[0], el.Points[1]);
 			else if (el.Type == PerspexGeometryElementType::pgLineTo)
 				rv->lineTo(el.Points[0]);
 			else if (el.Type == PerspexGeometryElementType::pgBezierTo)

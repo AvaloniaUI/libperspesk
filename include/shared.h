@@ -4,7 +4,7 @@ namespace libperspesk {
 	enum PerspexGeometryElementType
 	{
 		pgLineTo,
-		pgArcTo,
+		pgQuadTo,
 		pgBezierTo,
 		pgBeginFigure,
 		pgEndFigure
