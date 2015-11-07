@@ -13,17 +13,7 @@ namespace libperspesk
 			return;
 		Initialized = true;
 		SkGraphics::Init();
-
-
-#ifdef WIN32
-		GlContext = SkANGLEGLContext::Create(GrGLStandard::kNone_GrGLStandard, false);
-#else
-		GlContext = SkCreatePlatformGLContext(GrGLStandard::kNone_GrGLStandard);
-#endif
-		if (GlContext == nullptr || !GlContext->isValid())
-			return;
-		GrBackend = reinterpret_cast<GrBackendContext>(GlContext->gl());
-		Context = GrContext::Create(kOpenGL_GrBackend, GrBackend);
+		Context = CreatePlatformGrContext();
 	}
 }
 

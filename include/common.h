@@ -23,9 +23,7 @@
 using namespace libperspesk;
 namespace libperspesk
 {
-	extern SkGLContext* GlContext;
 	extern GrContext* Context;
-	extern GrBackendContext GrBackend;
 
 	class FormattedText;
 	class BitmapContainer;
@@ -45,8 +43,8 @@ namespace libperspesk
 		virtual ~RenderTarget() {}
 	};
 
-	extern void CreateWin32GLContext();
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
+	extern GrContext* CreatePlatformGrContext();
 
 	//Method table
 

@@ -111,7 +111,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;..\include;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\third_party\externals\angle2\include;C:\skia\skia\skia\include\xml;$(IncludePath)</IncludePath>
     <LibraryPath>C:\skia\skia\skia\out\Release;C:\skia\skia\skia\out\Release\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
+    <OutDir>..\..\Perspex\samples\TestApplication\bin\Debug</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -129,7 +129,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;..\include;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\third_party\externals\angle2\include;C:\skia\skia\skia\include\xml;$(IncludePath)</IncludePath>
     <LibraryPath>C:\skia\skia\skia\out\Release;C:\skia\skia\skia\out\Release\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
+    <OutDir>..\..\Perspex\samples\TestApplication\bin\Debug</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -302,17 +302,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\angle.cpp" />
     <ClCompile Include="..\src\bitmap.cpp" />
     <ClCompile Include="..\src\buffer.cpp" />
     <ClCompile Include="..\src\formatted_text.cpp" />
+    <ClCompile Include="..\src\gl.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\path.cpp" />
     <ClCompile Include="..\src\rendering_context.cpp" />
     <ClCompile Include="..\src\win32.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\angle.h" />
+    <ClInclude Include="..\include\pgl.h" />
     <ClInclude Include="..\include\common.h" />
     <ClInclude Include="..\include\shared.h" />
   </ItemGroup>

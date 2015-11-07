@@ -1,12 +1,10 @@
 #ifdef WIN32
-#include "angle.h"
+#include "pgl.h"
 #include "GrGpuResource.h"
 
-GLIMP(PFNGLGETINTEGERVPROC,glGetIntegerv);
+
 namespace libperspesk
 {
-	
-
 	class WindowRenderTarget : public RenderTarget
 	{
 	public:
@@ -15,16 +13,16 @@ namespace libperspesk
 		SkAutoTUnref<SkSurface> Surface;
 		SkSurfaceProps SurfaceProps;
 		bool IsGpu;
-		AngleContext Angle;
+		GlWindowContext Gl;
 		int Width, Height;
 
 		WindowRenderTarget(HWND hWnd, int width, int height)
-			: SurfaceProps(SkSurfaceProps::kLegacyFontHost_InitType), Angle(hWnd, width, height)
+			: SurfaceProps(SkSurfaceProps::kLegacyFontHost_InitType), Gl(hWnd, width, height)
 
 		{
 			this->hWnd = hWnd;
 			Width = 0, Height = 0;
-			Angle = AngleContext(hWnd, width, height);
+			Gl = GlWindowContext(hWnd, width, height);
 			IsGpu = false;
 			Resize(width, height);
 		}
@@ -38,44 +36,20 @@ namespace libperspesk
 			Width = width;
 			Height = height;
 
-
 			//Free resources
 			if(IsGpu)
 			{
-				Angle.detachANGLE();
+				Gl.detach();
 				IsGpu = false;
 			}
 			Bitmap = SkBitmap();
 
 			//Initialize
-			Angle.fWidth = width;
-			Angle.fHeight = height;
-			IsGpu = Angle.attachANGLE(0);
+			Gl.fWidth = width;
+			Gl.fHeight = height;
+			IsGpu = Gl.attach(0);
 			if (IsGpu)
-			{
-				SkAutoTUnref<GrContext> ctx;
-				ctx.reset(GrContext::Create(GrBackend::kOpenGL_GrBackend, GrBackend));
-
-								GrBackendRenderTargetDesc desc;
-				desc.fWidth = Width;
-				desc.fHeight =Height;
-				desc.fConfig = kSkia8888_GrPixelConfig;
-				desc.fOrigin = kBottomLeft_GrSurfaceOrigin;
-				
-				desc.fConfig = kRGBA_8888_GrPixelConfig;
-				eglGetConfigAttrib(Angle.fDisplay, Angle.fConfig, EGL_STENCIL_SIZE, &desc.fStencilBits);
-				eglGetConfigAttrib(Angle.fDisplay, Angle.fConfig, EGL_SAMPLES, &desc.fSampleCnt);
-				desc.fOrigin = GrSurfaceOrigin::kBottomLeft_GrSurfaceOrigin;
-				
-				GrGLint buffer;
-				glGetIntegerv(GL_FRAMEBUFFER_BINDING, &buffer);
-
-				desc.fRenderTargetHandle = buffer;
-
-				SkAutoTUnref<GrRenderTarget> target(ctx->textureProvider()->wrapBackendRenderTarget(desc));
-				Surface.reset(SkSurface::NewRenderTargetDirect(target));
-				
-			}
+				Surface.reset(Gl.CreateSurface());
 			else
 			{
 				Bitmap.allocPixels(SkImageInfo::MakeN32(width, height, kPremul_SkAlphaType));
@@ -90,7 +64,7 @@ namespace libperspesk
 			if (IsGpu)
 			{
 				Surface->getCanvas()->flush();
-				Angle.presentANGLE();
+				Gl.present();
 			}
 			else
 			{
@@ -122,7 +96,7 @@ namespace libperspesk
 		~WindowRenderTarget()
 		{
 			if (IsGpu)
-				Angle.detachANGLE();
+				Gl.detach();
 		}
 
 		class WinContext : public RenderingContext
@@ -145,7 +119,7 @@ namespace libperspesk
 		virtual RenderingContext* CreateRenderingContext() override
 		{
 			if (IsGpu)
-				Angle.MakeCurrent();
+				Gl.MakeCurrent();
 			Surface->getCanvas()->restoreToCount(1);
 			Surface->getCanvas()->save();
 			Surface->getCanvas()->clear(SkColorSetARGB(0, 0, 0, 0));

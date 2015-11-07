@@ -5,27 +5,25 @@
 #include "GLES2/gl2.h"
 #include "gl/SkGLContext.h"
 
-#include "gl/angle/SkANGLEGLContext.h"
-
 #define GLIMP(proto, name) proto name = (proto)eglGetProcAddress(#name)
 
 namespace libperspesk
 {
-	class AngleContext
+	class GlWindowContext
 	{
 	public:
 		HWND fHWND;
-		EGLDisplay          fDisplay;
-		EGLContext          fContext;
-		EGLSurface          fSurface;
-		EGLConfig           fConfig;
+		EGLSurface fSurface;
 		int fWidth;
 		int fHeight;
-		bool attachANGLE(int msaaSampleCount);
-		void detachANGLE();
-		void presentANGLE();
-		AngleContext(HWND wnd, int width, int height);
+		int fSampleCount;
+		int fStencilBits;
+		bool attach(int msaaSampleCount);
+		void detach();
+		void present();
+		GlWindowContext(HWND wnd, int width, int height);
 		void MakeCurrent();
+		SkSurface* CreateSurface();
 	};
 
 
