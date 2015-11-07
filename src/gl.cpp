@@ -70,7 +70,12 @@ namespace libperspesk {
 		eglMakeCurrent(EglDisplay, EglSurface, EglSurface, EglContext);
 		
 
-		const GrGLInterface* iface = GrGLCreateANGLEInterface();
+		const GrGLInterface* iface =
+#ifdef WIN32
+			GrGLCreateANGLEInterface();
+#else
+			GrGLCreateNativeInterface();
+#endif
 		if (!iface->validate())
 			return nullptr;
 		return GrContext::Create(kOpenGL_GrBackend, (GrBackendContext)iface);
@@ -96,10 +101,10 @@ namespace libperspesk {
 			eglChooseConfig(EglDisplay, configAttribs, &EglConfig, 1, &numConfigs);
 
 			// Create a surface
-			EGLSurface surface = eglCreateWindowSurface(EglDisplay, EglConfig,
-				(EGLNativeWindowType)fHWND,
+			fSurface = eglCreateWindowSurface(EglDisplay, EglConfig,
+				(EGLNativeWindowType)fWindow,
 				surfaceAttribList);
-			if (surface == EGL_NO_SURFACE) {
+			if (fSurface == EGL_NO_SURFACE) {
 
 				int err = eglGetError();
 				return false;
@@ -154,23 +159,13 @@ namespace libperspesk {
 		return SkSurface::NewRenderTargetDirect(target);
 	}
 
-	GlWindowContext::GlWindowContext(HWND wnd, int width, int height)
+	GlWindowContext::GlWindowContext(void* wnd, int width, int height)
 	{
+		fSampleCount = 0;
+		fStencilBits = 0;
 		fSurface = EGL_NO_SURFACE;
-		fHWND = wnd;
+		fWindow = wnd;
 		fWidth = width;
 		fHeight = height;
 	}
-
-
-
-
-
-
-
-#ifndef WIN32
-    extern RenderTarget *CreateRenderTarget(void *nativeHandle, int width, int height) {
-        return nullptr;
-    }
-#endif
 }

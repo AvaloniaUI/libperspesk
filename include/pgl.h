@@ -12,7 +12,7 @@ namespace libperspesk
 	class GlWindowContext
 	{
 	public:
-		HWND fHWND;
+		void* fWindow;
 		EGLSurface fSurface;
 		int fWidth;
 		int fHeight;
@@ -21,7 +21,7 @@ namespace libperspesk
 		bool attach(int msaaSampleCount);
 		void detach();
 		void present();
-		GlWindowContext(HWND wnd, int width, int height);
+		GlWindowContext(void* wnd, int width, int height);
 		void MakeCurrent();
 		SkSurface* CreateSurface();
 	};

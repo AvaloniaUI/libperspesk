@@ -1,14 +1,12 @@
-#ifdef WIN32
 #include "pgl.h"
 #include "GrGpuResource.h"
-
 
 namespace libperspesk
 {
 	class WindowRenderTarget : public RenderTarget
 	{
 	public:
-		HWND hWnd;
+		void* hWnd;
 		SkBitmap Bitmap;
 		SkAutoTUnref<SkSurface> Surface;
 		SkSurfaceProps SurfaceProps;
@@ -16,7 +14,7 @@ namespace libperspesk
 		GlWindowContext Gl;
 		int Width, Height;
 
-		WindowRenderTarget(HWND hWnd, int width, int height)
+		WindowRenderTarget(void* hWnd, int width, int height)
 			: SurfaceProps(SkSurfaceProps::kLegacyFontHost_InitType), Gl(hWnd, width, height)
 
 		{
@@ -68,6 +66,7 @@ namespace libperspesk
 			}
 			else
 			{
+#ifdef WIN32
 				BITMAPINFO bmi;
 				memset(&bmi, 0, sizeof(bmi));
 				bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
@@ -78,7 +77,7 @@ namespace libperspesk
 				bmi.bmiHeader.biCompression = BI_RGB;
 				bmi.bmiHeader.biSizeImage = 0;
 
-				HDC hdc = GetDC(hWnd);
+				HDC hdc = GetDC((HWND)hWnd);
 				Bitmap.lockPixels();
 				int ret = SetDIBitsToDevice(hdc,
 					0, 0,
@@ -89,7 +88,8 @@ namespace libperspesk
 					&bmi,
 					DIB_RGB_COLORS);
 				Bitmap.unlockPixels();
-				ReleaseDC(hWnd, hdc);
+				ReleaseDC((HWND)hWnd, hdc);
+#endif
 			}
 		}
 
@@ -133,6 +133,3 @@ namespace libperspesk
 		return new WindowRenderTarget((HWND)nativeHandle, width, height);
 	}
 }
-
-
-#endif

@@ -33,10 +33,10 @@
     <ClCompile Include="..\src\rendering_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\win32.cpp">
+    <ClCompile Include="..\src\gl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gl.cpp">
+    <ClCompile Include="..\src\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
