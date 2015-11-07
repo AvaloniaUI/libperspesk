@@ -11,7 +11,7 @@ android:
 	ACONF=arm_v7 TOOLCHAIN=arm-r10e-14 CC=arm-linux-androideabi-g++ SKIA_EXTRAS="-lskia_opts_neon -lwebp_dsp_neon" make build-android-config
 
 build-android-config:
-	CC=$(ANDROID_TOOLCHAIN_CC) OUTDIR=$(ACONF) LIBDIR=$(SKIA_DIR)/out/config/android-$(ACONF)/Release PLATFORM_LIBS="-L$(ANDROID_TOOLCHAIN)/sysroot/usr/lib/ $(PLATFORM_LIBS) -llog -lEGL -lGLESv2 -lstdc++ -lz" SKIA_EXTRAS="-lfreetype_static -lexpat -lcpu_features $(SKIA_EXTRAS)" make build-generic
+	CC=$(ANDROID_TOOLCHAIN_CC) OUTDIR=$(ACONF) LIBDIR=$(SKIA_DIR)/out/config/android-$(ACONF)/Release PLATFORM_LIBS="-L$(ANDROID_TOOLCHAIN)/sysroot/usr/lib/ $(PLATFORM_LIBS) -llog -lEGL -lGLESv2 -lstdc++ -lz -lsupc++ -lgnustl_shared" SKIA_EXTRAS="-lfreetype_static -lexpat -lcpu_features $(SKIA_EXTRAS)" make build-generic
 
 build-generic:
 	$(eval INCLUDES := $(shell echo ' ../include' $(SKIA_DIR)/include/*| sed 's/ / -I/g'))
