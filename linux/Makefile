@@ -17,7 +17,9 @@ build-generic:
 	$(eval INCLUDES := $(shell echo ' ../include' $(SKIA_DIR)/include/*| sed 's/ / -I/g'))
 	mkdir -p build/$(OUTDIR)
 	$(eval OUTFILE := build/$(OUTDIR)/libperspesk.so)
-	$(CC) $(INCLUDES) -Wl,-s -Wl,--version-script=libperspesk.version -fPIC  -std=c++11 -fpermissive -g  -shared -Wl,-soname,libperspesk.so -o $(OUTFILE) ../src/*.cpp  -Ltmp/merge/$(OUTDIR)  -L$(LIBDIR)/obj/gyp  -L$(LIBDIR)/lib -rdynamic -lmskia -letc1 -lSkKTX -lgiflib -ljpeg-turbo $(SKIA_EXTRAS)  -Wl,-Bdynamic $(PLATFORM_LIBS) -ldl -Wl,--no-undefined  #
+	rm -rf $(OUTFILE)
+	NAME=$(OUTDIR) ./mergelibs.sh
+	$(CC) $(INCLUDES) -Wl,-s -Wl,--version-script=libperspesk.version -fPIC -Wl,-static -Wl,-gc-section -std=c++11 -fpermissive -g  -shared -Wl,-soname,libperspesk.so -o $(OUTFILE) ../src/*.cpp  -Ltmp/merge/$(OUTDIR)  -L$(LIBDIR)/obj/gyp  -L$(LIBDIR)/lib -rdynamic -lmskia -letc1 -lSkKTX -lgiflib -ljpeg-turbo $(SKIA_EXTRAS)  -Wl,-Bdynamic  $(PLATFORM_LIBS) -ldl  -Wl,--no-undefined
 
 all: clean
 	make host
