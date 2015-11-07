@@ -130,6 +130,6 @@ namespace libperspesk
 
 	extern RenderTarget* CreateRenderTarget(void* nativeHandle, int width, int height)
 	{
-		return new WindowRenderTarget((HWND)nativeHandle, width, height);
+		return new WindowRenderTarget(nativeHandle, width, height);
 	}
 }

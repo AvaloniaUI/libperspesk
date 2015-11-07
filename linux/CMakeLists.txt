@@ -15,11 +15,17 @@ if(CMAKE_COMPILER_IS_GNUCC)
 endif()
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Release/)
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Release/obj/gyp)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Release/lib)
 
 add_library(perspesk SHARED ${SOURCE_FILES})
-SET(MYLIB -Wl,-whole-archive -ljpeg-turbo -lpng_static -lskia_codec -lskia_effects -lskia_opts -lskia_opts_avx -lskia_opts_sse42 -lskia_pdf -lskia_sfnt -lskia_skgputest -lskia_utils -lskia_xml -lskia_animator -lskia_core -lskia_images -lskia_opts_avx2 -lskia_opts_sse41 -lskia_opts_ssse3 -lskia_ports -lskia_skgpu -lskia_svg -lskia_views -lskia_xps -Wl,--no-whole-archive)
 
+#-Wl,--no-undefined
 
+target_link_libraries(perspesk  -rdynamic -Wl,-whole-archive libskia_core.a libskia_effects.a
+        libskia_images.a libskia_opts.a libskia_opts_sse41.a libskia_opts_ssse3.a libpng_static.a libskia_utils.a
+        libskia_ports.a libskia_sfnt.a libskia_skgpu.a libetc1.a libSkKTX.a
 
-target_link_libraries(perspesk ${MYLIB})
+        libgiflib.a libwebp_dec.a libwebp_utils.a libjpeg-turbo.a libwebp_dsp.a libwebp_enc.a libwebp_dsp_enc.a
 
+         -Wl,-no-whole-archive
+        -lfreetype  -lGL -lGLU -lEGL -lX11 -lz  -lfontconfig -lpthread)

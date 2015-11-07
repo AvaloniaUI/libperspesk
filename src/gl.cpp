@@ -22,6 +22,11 @@ namespace libperspesk {
 		EGL_NONE, EGL_NONE
 	};
 
+	static GrGLFuncPtr GlGetProc(void* ctx, const char name[])
+	{
+		return eglGetProcAddress(name);
+	}
+
 	extern GrContext* CreatePlatformGrContext()
 	{
 		EGLConfig config;
@@ -35,11 +40,11 @@ namespace libperspesk {
 #ifdef WIN32
 		EglDisplay = SkANGLEGLContext::GetD3DEGLDisplay(EGL_DEFAULT_DISPLAY, false);
 #else
-		eglGetDisplay(EGL_DEFAULT_DISPLAY);
+		EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 #endif
 
 		if (EGL_NO_DISPLAY == EglDisplay) {
-			SkDebugf("Could not create EGL display!");
+			SkDebugf("Could not create EGL display! Error %04x\n", eglGetError());
 			return nullptr;
 		}
 
@@ -74,20 +79,28 @@ namespace libperspesk {
 #ifdef WIN32
 			GrGLCreateANGLEInterface();
 #else
-			GrGLCreateNativeInterface();
+			GrGLAssembleGLESInterface(nullptr, GlGetProc);
 #endif
+		printf ("GLInterface: %p\n", iface);
 		if (!iface->validate())
 			return nullptr;
 		return GrContext::Create(kOpenGL_GrBackend, (GrBackendContext)iface);
 	}
 
-
-
+#ifndef WIN32
+#define GL_APIENTRYP GL_APIENTRY*
+	typedef void (GL_APIENTRYP PFNGLCLEARCOLORPROC) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+	typedef void (GL_APIENTRYP PFNGLCLEARSTENCILPROC) (GLint s);
+	typedef void (GL_APIENTRYP PFNGLFLUSHPROC) (void);
+	typedef void (GL_APIENTRYP PFNGLVIEWPORTPROC) (GLint x, GLint y, GLsizei width, GLsizei height);
+	typedef void (GL_APIENTRYP PFNGLGETINTEGERVPROC) (GLenum pname, GLint *data);
+#endif
 	GLIMP(PFNGLCLEARCOLORPROC, glClearColor);
 	GLIMP(PFNGLCLEARSTENCILPROC, glClearStencil);
 	GLIMP(PFNGLFLUSHPROC, glFlush);
 	GLIMP(PFNGLVIEWPORTPROC, glViewport);
 	GLIMP(PFNGLGETINTEGERVPROC, glGetIntegerv);
+
 
 	extern SkGLContext* CreatePlatformGlContext()
 	{

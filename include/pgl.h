@@ -1,11 +1,14 @@
 #include "common.h"
 #include "gl/GrGLInterface.h"
 #include "EGL/egl.h"
-#include "EGL/EGLPlatform.h"
+#include "EGL/eglplatform.h"
 #include "GLES2/gl2.h"
+
 #include "gl/SkGLContext.h"
 
 #define GLIMP(proto, name) proto name = (proto)eglGetProcAddress(#name)
+typedef GrGLFuncPtr (*GrGLGetProc)(void* ctx, const char name[]);
+extern const GrGLInterface* GrGLAssembleGLESInterface(void* ctx, GrGLGetProc get);
 
 namespace libperspesk
 {

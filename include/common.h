@@ -1,3 +1,5 @@
+#define SK_RELEASE
+
 #ifdef WIN32
 #define SK_ANGLE 1
 #include "gl/angle/SkANGLEGLContext.h"
