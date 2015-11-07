@@ -1,3 +1,4 @@
+#ifdef WIN32
 #include "gl/SkGLContext.h"
 #define SK_ANGLE 1
 #define private public
@@ -136,3 +137,4 @@ namespace libperspesk
 		fHeight = height;
 	}
 }
+#endif

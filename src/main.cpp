@@ -23,11 +23,15 @@ namespace libperspesk
 		if (GlContext == nullptr || !GlContext->isValid())
 			return;
 		GrBackend = reinterpret_cast<GrBackendContext>(GlContext->gl());
-		Context = GrContext::Create(GrBackend::kOpenGL_GrBackend, GrBackend);
+		Context = GrContext::Create(kOpenGL_GrBackend, GrBackend);
 	}
 }
 
-extern "C" __declspec(dllexport) void* GetPerspexMethodTable()
+extern "C"
+#ifdef WIN32
+__declspec(dllexport)
+#endif
+void* GetPerspexMethodTable()
 {
 	Init();
 	return &MethodTable;

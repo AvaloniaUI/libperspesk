@@ -13,6 +13,7 @@
 #include "SkImageDecoder.h"
 #include "gl/SkGLContext.h"
 #include "shared.h"
+#include "GrTypes.h"
 #ifdef LoadImage
 #undef LoadImage
 #endif
