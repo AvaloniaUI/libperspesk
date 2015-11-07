@@ -78,6 +78,8 @@ namespace libperspesk {
 		const GrGLInterface* iface =
 #ifdef WIN32
 			GrGLCreateANGLEInterface();
+#elif __ANDROID__
+			GrGLCreateNativeInterface();
 #else
 			GrGLAssembleGLESInterface(nullptr, GlGetProc);
 #endif
