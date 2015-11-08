@@ -133,7 +133,7 @@ extern GrContext* CreatePlatformGrContext() {
 		EGLint minorVersion;
 		eglInitialize(EglDisplay, &majorVersion, &minorVersion);
 
-		SkDebugf("Trying API #%i", api);
+		SkDebugf("Trying API #%i\n", api);
 		SkDebugf("VENDOR: %s\n", eglQueryString(EglDisplay, EGL_VENDOR));
 		SkDebugf("APIS: %s\n", eglQueryString(EglDisplay, EGL_CLIENT_APIS));
 		SkDebugf("VERSION: %s\n", eglQueryString(EglDisplay, EGL_VERSION));
@@ -201,9 +201,10 @@ extern GrContext* CreatePlatformGrContext() {
 		if(api == 1)
 			iface =	GrGLAssembleGLESInterface(nullptr, GlGetProc);
 #endif
-		printf ("GLInterface: %p\n", iface);
+		SkDebugf("GLInterface: %p\n", iface);
 		if (!iface->validate())
 			return nullptr;
+
 		return GrContext::Create(kOpenGL_GrBackend, (GrBackendContext)iface);
 	}
 	SkDebugf("Refusing to create GrContext, continuing without HW accelleration");
@@ -234,14 +235,23 @@ extern GrContext* CreatePlatformGrContext() {
 		return nullptr;
 	}
 
+	static void* ConvertWindow(void* window)
+	{
+#ifndef __ANDROID__
+		return window;
+#else
+		return ANativeWindow_fromSurface(Jni, (jobject)window);
+#endif
+
+	}
+
 	bool GlWindowContext::attach(int msaaSampleCount) {
 		if(Context  == nullptr)
 			return false;
 		if (EGL_NO_SURFACE == fSurface) {
 			// Create a surface
 			fSurface = eglCreateWindowSurface(EglDisplay, EglConfig,
-				(EGLNativeWindowType)fWindow,
-				surfaceAttribList);
+				(EGLNativeWindowType)ConvertWindow(fWindow),surfaceAttribList);
 			if (fSurface == EGL_NO_SURFACE) {
 
 				int err = eglGetError();

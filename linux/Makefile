@@ -12,11 +12,11 @@ endif
 	DEFINES=$(DEFINES) CC=/usr/bin/c++ OUTDIR=host LIBDIR=$(SKIA_DIR)/out/Release PLATFORM_LIBS="-lfreetype -lGL -lGLU -lEGL -lX11 -lz -lfontconfig -lpthread" make build-generic
 
 android:
-	ACONF=x86 TOOLCHAIN=x86-r10e-14 CC=i686-linux-android-g++ make build-android-config
-#	ACONF=arm_v7 TOOLCHAIN=arm-r10e-14 CC=arm-linux-androideabi-g++ make build-android-config
+#	ACONF=x86 TOOLCHAIN=x86-r10e-14 CC=i686-linux-android-g++ make build-android-config
+	ACONF=arm_v7 TOOLCHAIN=arm-r10e-14 CC=arm-linux-androideabi-g++ make build-android-config
 
 build-android-config:
-	CC=$(ANDROID_TOOLCHAIN_CC) OUTDIR=$(ACONF) LIBDIR=$(SKIA_DIR)/out/config/android-$(ACONF)/Release PLATFORM_LIBS="-L$(ANDROID_TOOLCHAIN)/sysroot/usr/lib/ $(PLATFORM_LIBS) -llog -lEGL -lGLESv2 -lstdc++ -lz -lsupc++ -lexpat -lcpu_features -lgnustl_shared" make build-generic
+	CC=$(ANDROID_TOOLCHAIN_CC) OUTDIR=$(ACONF) LIBDIR=$(SKIA_DIR)/out/config/android-$(ACONF)/Release PLATFORM_LIBS="-L$(ANDROID_TOOLCHAIN)/sysroot/usr/lib/ $(PLATFORM_LIBS) -llog -lEGL -lGLESv2 -lstdc++ -lz -lsupc++ -landroid -lexpat -lcpu_features" make build-generic
 
 build-generic:
 	$(eval INCLUDES := $(shell echo ' ../include' $(SKIA_DIR)/include/*| sed 's/ / -I/g'))

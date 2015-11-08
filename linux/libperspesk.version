@@ -1,5 +1,7 @@
 libperspesk {
-  global: GetPerspexMethodTable;
+  global: 
+	GetPerspexMethodTable;
+	PerspexJniInit;
   local: *;
 };
 

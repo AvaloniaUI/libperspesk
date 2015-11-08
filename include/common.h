@@ -4,6 +4,11 @@
 #define SK_ANGLE 1
 #include "gl/angle/SkANGLEGLContext.h"
 #endif
+#ifdef __ANDROID__
+#include <jni.h>
+#include <android/native_window_jni.h>
+#endif
+
 #include <SkGraphics.h>
 #include "SkData.h"
 #include "SkRegion.h"
@@ -76,6 +81,9 @@ namespace libperspesk
 #endif
 	};
 
+#ifdef __ANDROID__
+	extern JNIEnv *Jni;
+#endif
 
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 	extern GrContext* CreatePlatformGrContext();
