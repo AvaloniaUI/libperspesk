@@ -309,8 +309,8 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\path.cpp" />
     <ClCompile Include="..\src\rendering_context.cpp" />
+    <ClCompile Include="..\src\win32.cpp" />
     <ClCompile Include="..\src\window.cpp" />
-    <ClCompile Include="win32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\pgl.h" />
