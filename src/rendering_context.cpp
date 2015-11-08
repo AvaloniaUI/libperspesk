@@ -219,7 +219,7 @@ namespace libperspesk {
 	{
 		SkCanvas* c = ctx->Canvas;
 		SkPaint paint;
-		paint.setColor(SkColorSetARGB(opacity * 255, 255, 255, 255));
+		paint.setColor(SkColorSetARGB(ctx->Settings.Opacity* opacity * 255, 255, 255, 255));
 		ctx->Canvas->drawBitmapRect(image->Bitmap, *srcRect, *destRect, &paint);
 	}
 
