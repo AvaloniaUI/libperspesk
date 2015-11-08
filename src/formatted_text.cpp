@@ -2,17 +2,81 @@
 #include "SkTextBlob.h"
 #include "SkTypeface.h"
 #include "SkUtils.h"
-#include <vector>
+
 
 namespace libperspesk
 {
+	
+	template <typename T> class vector
+	{
+	private:		
+		T*_storage = nullptr;
+		size_t _size = 0;
+		size_t _dataSize = 0;
+	public:
+
+		~vector()
+		{
+			if (_storage != nullptr)
+				delete[] _storage;
+			_storage = nullptr;
+		}
+		size_t size()
+		{
+			return _size;
+		}
+
+		T* data()
+		{
+			return _storage;
+		}
+
+		void clear()
+		{
+			_size = 0;
+		}
+
+		void resize(size_t size)
+		{
+			if (size > _dataSize)
+			{
+				size_t newSize = 16;
+				while (newSize < size)
+					newSize = newSize * 2;
+				T*newData = new T[newSize];
+				if (_storage != nullptr)
+				{
+					for (size_t c = 0; c < _dataSize; c++)
+						newData[c] = _storage[c];
+					delete[] _storage;
+				}
+				_storage = newData;
+				_dataSize = newSize;
+			}
+			_size = size;
+		}
+
+		void push_back(T item)
+		{
+			resize(_size + 1);
+			_storage[_size - 1] = item;
+		}
+
+		T & operator [] (int index)
+		{
+			return _storage[index];
+		}
+
+	};
+
+
 	class FormattedText
 	{
 	public:
 		SkPaint Paint;
 		PerspexFormattedText Shared;
-		std::vector<PerspexFormattedTextLine> Lines;
-		std::vector<SkRect> Rects;
+		vector<PerspexFormattedTextLine> Lines;
+		vector<SkRect> Rects;
 		pchar*Data;
 		int Length;
 		float LineOffset;
