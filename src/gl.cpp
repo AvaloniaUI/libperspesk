@@ -198,11 +198,14 @@ extern GrContext* CreatePlatformGrContext() {
 			continue;
 		}
 
-		const GrGLInterface* iface =
+		const GrGLInterface* iface = nullptr;
 #ifdef __ANDROID__
-				GrGLCreateNativeInterface();
+		iface =GrGLCreateNativeInterface();
 #else
-				GrGLAssembleGLESInterface(nullptr, GlGetProc);
+		if(api == 0)
+			iface =	GrGLAssembleGLInterface(nullptr, GlGetProc);
+		if(api == 1)
+			iface =	GrGLAssembleGLESInterface(nullptr, GlGetProc);
 #endif
 		printf ("GLInterface: %p\n", iface);
 		if (!iface->validate())

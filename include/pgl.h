@@ -9,7 +9,7 @@
 #define GLIMP(proto, name) proto name = (proto)eglGetProcAddress(#name)
 typedef GrGLFuncPtr (*GrGLGetProc)(void* ctx, const char name[]);
 extern const GrGLInterface* GrGLAssembleGLESInterface(void* ctx, GrGLGetProc get);
-
+extern const GrGLInterface* GrGLAssembleGLInterface(void* ctx, GrGLGetProc get);
 namespace libperspesk
 {
 	class GlWindowContext
