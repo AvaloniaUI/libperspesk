@@ -8,6 +8,16 @@ namespace libperspesk {
 	static EGLContext EglContext;
 	static EGLDisplay EglDisplay;
 
+	static GrGLFuncPtr GlGetProc(void* ctx, const char name[])
+	{
+		return eglGetProcAddress(name);
+	}
+
+	static const EGLint surfaceAttribList[] = {
+			EGL_NONE, EGL_NONE
+	};
+
+	#ifdef WIN32
 	static const EGLint configAttribs[] = {
 		EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
@@ -18,14 +28,8 @@ namespace libperspesk {
 		EGL_NONE
 	};
 
-	static const EGLint surfaceAttribList[] = {
-		EGL_NONE, EGL_NONE
-	};
 
-	static GrGLFuncPtr GlGetProc(void* ctx, const char name[])
-	{
-		return eglGetProcAddress(name);
-	}
+
 
 	extern GrContext* CreatePlatformGrContext()
 	{
@@ -37,11 +41,7 @@ namespace libperspesk {
 
 
 
-#ifdef WIN32
 		EglDisplay = SkANGLEGLContext::GetD3DEGLDisplay(EGL_DEFAULT_DISPLAY, false);
-#else
-		EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-#endif
 
 		if (EGL_NO_DISPLAY == EglDisplay) {
 			SkDebugf("Could not create EGL display! Error %04x\n", eglGetError());
@@ -52,14 +52,13 @@ namespace libperspesk {
 		EGLint minorVersion;
 		eglInitialize(EglDisplay, &majorVersion, &minorVersion);
 
-		EGLConfig surfaceConfig;
-		eglChooseConfig(EglDisplay, configAttribs, &surfaceConfig, 1, &numConfigs);
+		eglChooseConfig(EglDisplay, configAttribs, &EglConfig, 1, &numConfigs);
 
 		static const EGLint contextAttribs[] = {
 			EGL_CONTEXT_CLIENT_VERSION, 2,
 			EGL_NONE
 		};
-		EglContext = eglCreateContext(EglDisplay, surfaceConfig, nullptr, contextAttribs);
+		EglContext = eglCreateContext(EglDisplay, EglConfig, nullptr, contextAttribs);
 
 
 		static const EGLint surfaceAttribs[] = {
@@ -88,7 +87,136 @@ namespace libperspesk {
 			return nullptr;
 		return GrContext::Create(kOpenGL_GrBackend, (GrBackendContext)iface);
 	}
+	#else
 
+	static EGLConfig surfaceConfig;
+extern GrContext* CreatePlatformGrContext() {
+	static const EGLint kEGLContextAttribsForOpenGL[] = {
+			EGL_NONE
+	};
+
+	static const EGLint kEGLContextAttribsForOpenGLES[] = {
+			EGL_CONTEXT_CLIENT_VERSION, 2,
+			EGL_NONE
+	};
+
+	static const struct {
+		const EGLint *fContextAttribs;
+		EGLenum fAPI;
+		EGLint fRenderableTypeBit;
+		GrGLStandard fStandard;
+	} kAPIs[] = {
+			{   // OpenGL
+					kEGLContextAttribsForOpenGL,
+					EGL_OPENGL_API,
+					EGL_OPENGL_BIT,
+					kGL_GrGLStandard
+			},
+			{   // OpenGL ES. This seems to work for both ES2 and 3 (when available).
+					kEGLContextAttribsForOpenGLES,
+					EGL_OPENGL_ES_API,
+					EGL_OPENGL_ES2_BIT,
+					kGLES_GrGLStandard
+			},
+	};
+
+	size_t apiLimit = SK_ARRAY_COUNT(kAPIs);
+	size_t api = 0;
+	/*
+	if (forcedGpuAPI == kGL_GrGLStandard) {
+		apiLimit = 1;
+	} else if (forcedGpuAPI == kGLES_GrGLStandard) {
+		api = 1;
+	}*/
+	SkASSERT(forcedGpuAPI == kNone_GrGLStandard || kAPIs[api].fStandard == forcedGpuAPI);
+
+	SkAutoTUnref<const GrGLInterface> gl;
+
+	for (; nullptr == gl.get() && api < apiLimit; ++api) {
+		EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+
+		EGLint majorVersion;
+		EGLint minorVersion;
+		eglInitialize(EglDisplay, &majorVersion, &minorVersion);
+
+		SkDebugf("Trying API #%i", api);
+		SkDebugf("VENDOR: %s\n", eglQueryString(EglDisplay, EGL_VENDOR));
+		SkDebugf("APIS: %s\n", eglQueryString(EglDisplay, EGL_CLIENT_APIS));
+		SkDebugf("VERSION: %s\n", eglQueryString(EglDisplay, EGL_VERSION));
+		SkDebugf("EXTENSIONS %s\n", eglQueryString(EglDisplay, EGL_EXTENSIONS));
+
+		if (!eglBindAPI(kAPIs[api].fAPI)) {
+			continue;
+		}
+
+		EGLint numConfigs = 0;
+		const EGLint configAttribs[] = {
+				EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,
+				EGL_RENDERABLE_TYPE, kAPIs[api].fRenderableTypeBit,
+				EGL_RED_SIZE, 8,
+				EGL_GREEN_SIZE, 8,
+				EGL_BLUE_SIZE, 8,
+				EGL_ALPHA_SIZE, 8,
+				EGL_NONE
+		};
+
+
+		if (!eglChooseConfig(EglDisplay, configAttribs, &surfaceConfig, 1, &numConfigs)) {
+			SkDebugf("eglChooseConfig failed. EGL Error: 0x%08x\n", eglGetError());
+			continue;
+		}
+		else
+			EglConfig  = surfaceConfig;
+
+		if (0 == numConfigs) {
+			SkDebugf("No suitable EGL config found.\n");
+			continue;
+		}
+
+		EglContext = eglCreateContext(EglDisplay, surfaceConfig, nullptr, kAPIs[api].fContextAttribs);
+		if (EGL_NO_CONTEXT == EglContext) {
+			SkDebugf("eglCreateContext failed.  EGL Error: 0x%08x\n", eglGetError());
+			continue;
+		}
+
+		static const EGLint kSurfaceAttribs[] = {
+				EGL_WIDTH, 1,
+				EGL_HEIGHT, 1,
+				EGL_NONE
+		};
+
+		EglSurface = eglCreatePbufferSurface(EglDisplay, surfaceConfig, kSurfaceAttribs);
+		if (EGL_NO_SURFACE == EglSurface) {
+			SkDebugf("eglCreatePbufferSurface failed. EGL Error: 0x%08x\n", eglGetError());
+
+			continue;
+		}
+
+		if (!eglMakeCurrent(EglDisplay, EglSurface, EglSurface, EglContext)) {
+			SkDebugf("eglMakeCurrent failed.  EGL Error: 0x%08x\n", eglGetError());
+
+			continue;
+		}
+
+		const GrGLInterface* iface =
+#ifdef __ANDROID__
+				GrGLCreateNativeInterface();
+#else
+				GrGLAssembleGLESInterface(nullptr, GlGetProc);
+#endif
+		printf ("GLInterface: %p\n", iface);
+		if (!iface->validate())
+			return nullptr;
+		return GrContext::Create(kOpenGL_GrBackend, (GrBackendContext)iface);
+	}
+	SkDebugf("Refusing to create GrContext, continuing without HW accelleration");
+	return nullptr;
+}
+	
+	
+#endif
+	
+	
 #ifndef WIN32
 #define GL_APIENTRYP GL_APIENTRY*
 	typedef void (GL_APIENTRYP PFNGLCLEARCOLORPROC) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
@@ -111,10 +239,6 @@ namespace libperspesk {
 
 	bool GlWindowContext::attach(int msaaSampleCount) {
 		if (EGL_NO_SURFACE == fSurface) {
-
-			EGLint numConfigs;
-			eglChooseConfig(EglDisplay, configAttribs, &EglConfig, 1, &numConfigs);
-
 			// Create a surface
 			fSurface = eglCreateWindowSurface(EglDisplay, EglConfig,
 				(EGLNativeWindowType)fWindow,
@@ -122,6 +246,7 @@ namespace libperspesk {
 			if (fSurface == EGL_NO_SURFACE) {
 
 				int err = eglGetError();
+				printf("Failed to create surface %i\n", err);
 				return false;
 			}
 			eglGetConfigAttrib(EglDisplay, EglConfig, EGL_STENCIL_SIZE, &fStencilBits);
