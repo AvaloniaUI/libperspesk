@@ -64,6 +64,7 @@ namespace libperspesk
 		virtual ~RenderTarget() {}
 	};
 
+
 	class SwViewport
 	{
 	public:
@@ -71,6 +72,7 @@ namespace libperspesk
 		void  Setup();
 		SkAutoTUnref<SkSurface> Surface;
 		void Rezise(int width, int height);
+		void PrepareToDraw();
 		void DrawToWindow();
 		~SwViewport();
 		SwViewport();
@@ -78,7 +80,10 @@ namespace libperspesk
 		SkBitmap Bitmap;
 #ifdef USE_X11
 		GC Gc;
+#elif __ANDROID__
+		ANativeWindow* NativeWindow;
 #endif
+
 	};
 
 #ifdef __ANDROID__

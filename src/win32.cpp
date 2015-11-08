@@ -19,6 +19,10 @@ namespace libperspesk
 
 	}
 
+	void SwViewport::PrepareToDraw() {
+	}
+	}
+
 	void SwViewport::DrawToWindow()
 	{
 		BITMAPINFO bmi;

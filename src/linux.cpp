@@ -21,6 +21,8 @@ namespace libperspesk {
 		return XInitImage(&image);
 	}
 
+	void SwViewport::PrepareToDraw() {}
+
 	void SwViewport::DrawToWindow()
 	{
 		XImage image;

@@ -94,7 +94,11 @@ namespace libperspesk
 		{
 			if (IsGpu)
 				Gl.MakeCurrent();
+			else
+				Sw.PrepareToDraw();
 			SkSurface*s = getSurface();
+			if(s==nullptr)
+				SkDebugf("No surface to draw, crashing...\n");
 			s->getCanvas()->restoreToCount(1);
 			s->getCanvas()->save();
 			s->getCanvas()->clear(SkColorSetARGB(0, 0, 0, 0));
