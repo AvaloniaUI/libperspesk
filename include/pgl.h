@@ -26,7 +26,7 @@ namespace libperspesk
 		void present();
 		GlWindowContext(void* wnd, int width, int height);
 		void MakeCurrent();
-		SkSurface* CreateSurface();
+		SkAutoTUnref<SkSurface> Surface;
 	};
 
 

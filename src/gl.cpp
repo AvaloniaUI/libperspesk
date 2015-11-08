@@ -67,27 +67,21 @@ namespace libperspesk {
 			EGL_NONE
 		};
 
-		EglSurface = eglCreatePbufferSurface(EglDisplay, surfaceConfig, surfaceAttribs);
+		EglSurface = eglCreatePbufferSurface(EglDisplay, EglConfig, surfaceAttribs);
 
 
 
 		eglMakeCurrent(EglDisplay, EglSurface, EglSurface, EglContext);
 		
 
-		const GrGLInterface* iface =
-#ifdef WIN32
-			GrGLCreateANGLEInterface();
-#elif __ANDROID__
-			GrGLCreateNativeInterface();
-#else
-			GrGLAssembleGLESInterface(nullptr, GlGetProc);
-#endif
+		const GrGLInterface* iface = GrGLCreateANGLEInterface();
+
 		printf ("GLInterface: %p\n", iface);
 		if (!iface->validate())
 			return nullptr;
 		return GrContext::Create(kOpenGL_GrBackend, (GrBackendContext)iface);
 	}
-	#else
+#else
 
 	static EGLConfig surfaceConfig;
 extern GrContext* CreatePlatformGrContext() {
@@ -258,12 +252,32 @@ extern GrContext* CreatePlatformGrContext() {
 			glClearColor(0, 0, 0, 0);
 			glViewport(0, 0, fWidth, fHeight);
 
+
+			GrBackendRenderTargetDesc desc;
+			desc.fWidth = fWidth;
+			desc.fHeight = fHeight;
+			desc.fConfig = kSkia8888_GrPixelConfig;
+			desc.fOrigin = kBottomLeft_GrSurfaceOrigin;
+
+			desc.fConfig = kRGBA_8888_GrPixelConfig;
+			desc.fStencilBits = fStencilBits;
+			desc.fSampleCnt = fSampleCount;
+			desc.fOrigin = GrSurfaceOrigin::kBottomLeft_GrSurfaceOrigin;
+
+			GrGLint buffer;
+			glGetIntegerv(GL_FRAMEBUFFER_BINDING, &buffer);
+
+			desc.fRenderTargetHandle = buffer;
+
+			SkAutoTUnref<GrRenderTarget> target(Context->textureProvider()->wrapBackendRenderTarget(desc));
+			Surface.reset(SkSurface::NewRenderTargetDirect(target));
 			return true;
 		}
 		return false;
 	}
 
 	void GlWindowContext::detach() {
+		Surface.reset();
 		eglMakeCurrent(EglDisplay, EglSurface, EglSurface, EglContext);
 		eglDestroySurface(EglDisplay, fSurface);
 		fSurface = EGL_NO_SURFACE;
@@ -280,27 +294,7 @@ extern GrContext* CreatePlatformGrContext() {
 		eglMakeCurrent(EglDisplay, fSurface, fSurface, EglContext);
 	}
 
-	SkSurface* GlWindowContext::CreateSurface()
-	{
-		GrBackendRenderTargetDesc desc;
-		desc.fWidth = fWidth;
-		desc.fHeight = fHeight;
-		desc.fConfig = kSkia8888_GrPixelConfig;
-		desc.fOrigin = kBottomLeft_GrSurfaceOrigin;
 
-		desc.fConfig = kRGBA_8888_GrPixelConfig;
-		desc.fStencilBits = fStencilBits;
-		desc.fSampleCnt =  fSampleCount;
-		desc.fOrigin = GrSurfaceOrigin::kBottomLeft_GrSurfaceOrigin;
-
-		GrGLint buffer;
-		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &buffer);
-
-		desc.fRenderTargetHandle = buffer;
-
-		SkAutoTUnref<GrRenderTarget> target(Context->textureProvider()->wrapBackendRenderTarget(desc));
-		return SkSurface::NewRenderTargetDirect(target);
-	}
 
 	GlWindowContext::GlWindowContext(void* wnd, int width, int height)
 	{

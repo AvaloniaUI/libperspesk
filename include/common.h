@@ -45,6 +45,22 @@ namespace libperspesk
 		virtual ~RenderTarget() {}
 	};
 
+	class SwViewport
+	{
+	public:
+		SkAutoTUnref<SkSurface> Surface;
+		void Rezise(int width, int height);
+		void DrawToWindow(void* window);
+		~SwViewport();
+		SwViewport();
+	private:
+#ifdef WIN32
+		SkBitmap Bitmap;
+#endif
+
+	};
+
+
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 	extern GrContext* CreatePlatformGrContext();
 

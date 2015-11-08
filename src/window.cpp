@@ -7,8 +7,7 @@ namespace libperspesk
 	{
 	public:
 		void* hWnd;
-		SkBitmap Bitmap;
-		SkAutoTUnref<SkSurface> Surface;
+		SwViewport Sw;
 		SkSurfaceProps SurfaceProps;
 		bool IsGpu;
 		GlWindowContext Gl;
@@ -25,7 +24,13 @@ namespace libperspesk
 			Resize(width, height);
 		}
 		
-
+		SkSurface* getSurface()
+		{
+			if (IsGpu)
+				return Gl.Surface.get();
+			else
+				return Sw.Surface.get();
+		}
 
 		virtual void Resize(int width, int height) override
 		{
@@ -40,19 +45,14 @@ namespace libperspesk
 				Gl.detach();
 				IsGpu = false;
 			}
-			Bitmap = SkBitmap();
 
 			//Initialize
 			Gl.fWidth = width;
 			Gl.fHeight = height;
 			IsGpu = Gl.attach(0);
-			if (IsGpu)
-				Surface.reset(Gl.CreateSurface());
-			else
+			if (!IsGpu)
 			{
-				Bitmap.allocPixels(SkImageInfo::MakeN32(width, height, kPremul_SkAlphaType));
-				SkSurface* pSurf = SkSurface::NewRasterDirect(Bitmap.info(), Bitmap.getPixels(), Bitmap.rowBytes());
-				Surface.reset(pSurf);
+				Sw.Rezise(width, height);
 			}
 		}
 
@@ -60,37 +60,9 @@ namespace libperspesk
 		void Present()
 		{
 			if (IsGpu)
-			{
-				Surface->getCanvas()->flush();
 				Gl.present();
-			}
 			else
-			{
-#ifdef WIN32
-				BITMAPINFO bmi;
-				memset(&bmi, 0, sizeof(bmi));
-				bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-				bmi.bmiHeader.biWidth = Bitmap.width();
-				bmi.bmiHeader.biHeight = -Bitmap.height(); // top-down image
-				bmi.bmiHeader.biPlanes = 1;
-				bmi.bmiHeader.biBitCount = 32;
-				bmi.bmiHeader.biCompression = BI_RGB;
-				bmi.bmiHeader.biSizeImage = 0;
-
-				HDC hdc = GetDC((HWND)hWnd);
-				Bitmap.lockPixels();
-				int ret = SetDIBitsToDevice(hdc,
-					0, 0,
-					Bitmap.width(), Bitmap.height(),
-					0, 0,
-					0, Bitmap.height(),
-					Bitmap.getPixels(),
-					&bmi,
-					DIB_RGB_COLORS);
-				Bitmap.unlockPixels();
-				ReleaseDC((HWND)hWnd, hdc);
-#endif
-			}
+				Sw.DrawToWindow(hWnd);
 		}
 
 		~WindowRenderTarget()
@@ -106,12 +78,12 @@ namespace libperspesk
 			WinContext(WindowRenderTarget* target)
 			{
 				Target = target;
-				Canvas = target->Surface->getCanvas();
+				Canvas = target->getSurface()->getCanvas();
 			}
 
 			~WinContext()
 			{
-				Target->Surface->getCanvas()->flush();
+				Target->getSurface()->getCanvas()->flush();
 				Target->Present();
 			}
 		};
@@ -120,10 +92,11 @@ namespace libperspesk
 		{
 			if (IsGpu)
 				Gl.MakeCurrent();
-			Surface->getCanvas()->restoreToCount(1);
-			Surface->getCanvas()->save();
-			Surface->getCanvas()->clear(SkColorSetARGB(0, 0, 0, 0));
-			Surface->getCanvas()->resetMatrix();
+			SkSurface*s = getSurface();
+			s->getCanvas()->restoreToCount(1);
+			s->getCanvas()->save();
+			s->getCanvas()->clear(SkColorSetARGB(0, 0, 0, 0));
+			s->getCanvas()->resetMatrix();
 			return new WinContext(this);
 		}
 	};
