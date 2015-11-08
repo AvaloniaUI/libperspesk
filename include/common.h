@@ -89,6 +89,11 @@ namespace libperspesk
 #ifdef __ANDROID__
 	extern JNIEnv *Jni;
 #endif
+#ifdef USE_VERBOSE
+#define VERBOSE(...) SkDebugf(__VA_ARGS__)
+#else
+#define VERBOSE(...)
+#endif
 
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 	extern GrContext* CreatePlatformGrContext();

@@ -8,7 +8,7 @@ namespace libperspesk
 
 	void SwViewport::DrawToWindow()
 	{
-		SkDebugf("Releasing native window");
+		VERBOSE("Releasing native window");
 		Surface.reset();
 		ANativeWindow_unlockAndPost(NativeWindow);
 		ANativeWindow_release(NativeWindow);
@@ -28,13 +28,12 @@ namespace libperspesk
 	void SwViewport::PrepareToDraw() {
 
 		NativeWindow = ANativeWindow_fromSurface(Jni, (jobject)Window);
-		ANativeWindow_acquire(NativeWindow);
 
-		SkDebugf("Got native window %p", NativeWindow);
+		VERBOSE("Got native window %p", NativeWindow);
 		int width = ANativeWindow_getWidth(NativeWindow);
 		int height = ANativeWindow_getHeight(NativeWindow);
 		int format = ANativeWindow_getFormat(NativeWindow);
-		SkDebugf("Size: %ix%i, Format: %i", width, height, format);
+		VERBOSE("Size: %ix%i, Format: %i", width, height, format);
 		ANativeWindow_Buffer buffer;
 		ARect rc;
 		rc.left = 0;
@@ -43,7 +42,7 @@ namespace libperspesk
 		rc.bottom = height;
 		buffer.bits = nullptr;
 		ANativeWindow_lock(NativeWindow, &buffer, &rc);
-		SkDebugf("Locked data: %p", buffer.bits);
+		VERBOSE("Locked data: %p", buffer.bits);
 		SkColorType color = SKIA_COLOR_FORMAT;
 		int stride  = buffer.stride;
 
@@ -54,13 +53,13 @@ namespace libperspesk
 		}
 		else
 			stride *= 4;
-		SkDebugf("Using color format: %i, stride: %i", color, stride);
+		VERBOSE("Using color format: %i, stride: %i", color, stride);
 
 
 
 		Surface.reset(SkSurface::NewRasterDirect(SkImageInfo::Make(width, height, color, kOpaque_SkAlphaType),
 		    buffer.bits, stride));
-		SkDebugf("Surface: %p", Surface.get());
+		VERBOSE("Surface: %p", Surface.get());
 	}
 	SwViewport::~SwViewport()
 	{
