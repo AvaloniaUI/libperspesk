@@ -235,23 +235,21 @@ extern GrContext* CreatePlatformGrContext() {
 		return nullptr;
 	}
 
-	static void* ConvertWindow(void* window)
-	{
-#ifndef __ANDROID__
-		return window;
-#else
-		return ANativeWindow_fromSurface(Jni, (jobject)window);
-#endif
-
-	}
-
 	bool GlWindowContext::attach(int msaaSampleCount) {
 		if(Context  == nullptr)
 			return false;
 		if (EGL_NO_SURFACE == fSurface) {
 			// Create a surface
+#ifdef __ANDROID__
+			ANativeWindow*native = ANativeWindow_fromSurface(Jni, (jobject)fWindow);
 			fSurface = eglCreateWindowSurface(EglDisplay, EglConfig,
-				(EGLNativeWindowType)ConvertWindow(fWindow),surfaceAttribList);
+				(EGLNativeWindowType)native,surfaceAttribList);
+			ANativeWindow_release(native);
+#else
+			fSurface = eglCreateWindowSurface(EglDisplay, EglConfig,
+				(EGLNativeWindowType)fWindow,surfaceAttribList);
+#endif
+
 			if (fSurface == EGL_NO_SURFACE) {
 
 				int err = eglGetError();
