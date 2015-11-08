@@ -235,6 +235,8 @@ extern GrContext* CreatePlatformGrContext() {
 	}
 
 	bool GlWindowContext::attach(int msaaSampleCount) {
+		if(Context  == nullptr)
+			return false;
 		if (EGL_NO_SURFACE == fSurface) {
 			// Create a surface
 			fSurface = eglCreateWindowSurface(EglDisplay, EglConfig,

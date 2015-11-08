@@ -13,11 +13,12 @@ FILE(GLOB SOURCE_FILES ../src/*.cpp)
 if(CMAKE_COMPILER_IS_GNUCC)
  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
-LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Release/)
-LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Release/obj/gyp)
-LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Release/lib)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Debug/)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Debug/obj/gyp)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/../../skia/out/Debug/lib)
 
 add_library(perspesk SHARED ${SOURCE_FILES})
+add_definitions( -DUSE_X11 )
 
 #-Wl,--no-undefined
 

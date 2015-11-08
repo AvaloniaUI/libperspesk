@@ -2,6 +2,11 @@
 namespace libperspesk
 {
 #ifdef WIN32
+
+	extern void InitSw()
+	{
+	}
+
 	void SwViewport::Rezise(int width, int height)
 	{
 		Surface.reset(nullptr);
@@ -9,7 +14,12 @@ namespace libperspesk
 		Surface.reset(SkSurface::NewRasterDirect(Bitmap.info(), Bitmap.getPixels(), Bitmap.rowBytes()));
 	}
 
-	void SwViewport::DrawToWindow(void* window)
+	void SwViewport::Setup()
+	{
+
+	}
+
+	void SwViewport::DrawToWindow()
 	{
 		BITMAPINFO bmi;
 		memset(&bmi, 0, sizeof(bmi));
@@ -23,7 +33,7 @@ namespace libperspesk
 
 		
 
-		HDC hdc = GetDC((HWND)window);
+		HDC hdc = GetDC((HWND)Window);
 		Bitmap.lockPixels();
 		int ret = SetDIBitsToDevice(hdc,
 			0, 0,
@@ -35,7 +45,7 @@ namespace libperspesk
 			DIB_RGB_COLORS);
 		Bitmap.unlockPixels();
 
-		ReleaseDC((HWND)window, hdc);
+		ReleaseDC((HWND)Window, hdc);
 	}
 
 	SwViewport::~SwViewport()

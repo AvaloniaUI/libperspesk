@@ -14,6 +14,7 @@ namespace libperspesk
 		Initialized = true;
 		SkGraphics::Init();
 		Context = CreatePlatformGrContext();
+		InitSw();
 	}
 }
 

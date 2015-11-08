@@ -20,6 +20,8 @@ namespace libperspesk
 			this->hWnd = hWnd;
 			Width = 0, Height = 0;
 			Gl = GlWindowContext(hWnd, width, height);
+			Sw.Window = hWnd;
+			Sw.Setup();
 			IsGpu = false;
 			Resize(width, height);
 		}
@@ -62,7 +64,7 @@ namespace libperspesk
 			if (IsGpu)
 				Gl.present();
 			else
-				Sw.DrawToWindow(hWnd);
+				Sw.DrawToWindow();
 		}
 
 		~WindowRenderTarget()

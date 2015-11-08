@@ -20,6 +20,20 @@
 #undef LoadImage
 #endif
 
+#if USE_X11
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xresource.h>
+#include <X11/Xatom.h>
+#include <X11/XKBlib.h>
+#endif
+
+#ifdef CPU_MIPS
+#define SKIA_COLOR_FORMAT kARGB_8888_SkColorType
+#else
+#define SKIA_COLOR_FORMAT kBGRA_8888_SkColorType
+#endif
+
 #define pchar unsigned short
 
 using namespace libperspesk;
@@ -48,22 +62,24 @@ namespace libperspesk
 	class SwViewport
 	{
 	public:
+		void*Window;
+		void  Setup();
 		SkAutoTUnref<SkSurface> Surface;
 		void Rezise(int width, int height);
-		void DrawToWindow(void* window);
+		void DrawToWindow();
 		~SwViewport();
 		SwViewport();
 	private:
-#ifdef WIN32
 		SkBitmap Bitmap;
+#ifdef USE_X11
+		GC Gc;
 #endif
-
 	};
 
 
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 	extern GrContext* CreatePlatformGrContext();
-
+	extern void InitSw();
 	//Method table
 
 	extern RenderTarget* CreateRenderTarget(void* nativeHandle, int width, int height);
