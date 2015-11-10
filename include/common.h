@@ -60,7 +60,6 @@ namespace libperspesk
 	{
 	public:
 		virtual RenderingContext* CreateRenderingContext() = 0;
-		virtual void Resize(int width, int height) = 0;
 		virtual ~RenderTarget() {}
 	};
 
@@ -99,9 +98,10 @@ namespace libperspesk
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 	extern GrContext* CreatePlatformGrContext();
 	extern void InitSw();
+	extern void GetPlatformWindowDimensions(void* nativeHandle, int* width, int* height);
 	//Method table
 
-	extern RenderTarget* CreateRenderTarget(void* nativeHandle, int width, int height);
+	extern RenderTarget* CreateRenderTarget(void* nativeHandle);
 	extern void DrawRectangle(RenderingContext*ctx, PerspexBrush*brush, SkRect*rect, float borderRadius);
 	extern void PushClip(RenderingContext*ctx, SkRect*rect);
 	extern void PopClip(RenderingContext*ctx);
@@ -114,7 +114,6 @@ namespace libperspesk
 	extern SkData* SaveImage(BitmapContainer*pImage, PerspexImageType ptype, int quality);
 	extern void DrawImage(RenderingContext*ctx, BitmapContainer*image, float opacity, SkRect* srcRect, SkRect*destRect);
 	extern BitmapContainer* CreateRenderTargetBitmap(int width, int height);
-	extern void ResizeBitmap(BitmapContainer *bmp, int width, int height);
 	extern void DisposeImage(BitmapContainer* bmp);
 	extern SkTypeface* CreateTypeface(char* name, int style);
 	extern FormattedText* CreateFormattedText(pchar* text, int len, SkTypeface* typeface, float fontSize, SkPaint::Align align, PerspexFormattedText**exp);
@@ -129,11 +128,6 @@ namespace libperspesk
 	{
 		return target->CreateRenderingContext();
 	};
-
-	void RenderTargetResize(RenderTarget* target, int width, int height)
-	{
-		target->Resize(width, height);
-	}
 
 	void DisposeRenderTarget(RenderTarget* target)
 	{
@@ -168,7 +162,6 @@ namespace libperspesk
 	static void* MethodTable[] = {
 		&CreateRenderTarget,
 		&DisposeRenderTarget,
-		&RenderTargetResize,
 		&RenderTargetCreateRenderingContext,
 		&DisposeRenderingContext,
 		&DrawRectangle,
@@ -186,7 +179,6 @@ namespace libperspesk
 		&SaveImage,
 		&DrawImage,
 		&CreateRenderTargetBitmap,
-		&ResizeBitmap,
 		&DisposeImage,
 		&GetDrawingContextSettingsPtr,
 		&CreateTypeface,

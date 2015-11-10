@@ -50,12 +50,6 @@ namespace libperspesk {
 		{
 			return new ImageRenderingContext(this);
 		}
-
-		virtual void Resize(int width, int height) override
-		{
-			Bitmap.allocN32Pixels(width, height);
-		}
-
 	};
 
 	inline SkShader::TileMode GetGradientTileMode(PerspexGradientSpreadMethod method)
@@ -228,11 +222,6 @@ namespace libperspesk {
 		BitmapContainer*rv = new BitmapContainer();
 		rv->Bitmap.allocN32Pixels(width, height);
 		return rv;
-	}
-
-	extern void ResizeBitmap(BitmapContainer *bmp, int width, int height)
-	{
-		bmp->Resize(width, height);
 	}
 
 	extern void DisposeImage(BitmapContainer* bmp)

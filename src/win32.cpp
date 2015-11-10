@@ -59,7 +59,13 @@ namespace libperspesk
 	{
 	}
 
-
+	extern void GetPlatformWindowDimensions(void* nativeHandle, int* width, int* height)
+	{
+		RECT rc;
+		GetClientRect((HWND)nativeHandle, &rc);
+		*width = rc.right - rc.left;
+		*height = rc.bottom - rc.top;
+	}
 
 
 #endif

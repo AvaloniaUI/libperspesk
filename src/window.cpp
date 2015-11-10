@@ -13,18 +13,7 @@ namespace libperspesk
 		GlWindowContext Gl;
 		int Width, Height;
 
-		WindowRenderTarget(void* hWnd, int width, int height)
-			: SurfaceProps(SkSurfaceProps::kLegacyFontHost_InitType), Gl(hWnd, width, height)
 
-		{
-			this->hWnd = hWnd;
-			Width = 0, Height = 0;
-			Gl = GlWindowContext(hWnd, width, height);
-			Sw.Window = hWnd;
-			Sw.Setup();
-			IsGpu = false;
-			Resize(width, height);
-		}
 		
 		SkSurface* getSurface()
 		{
@@ -34,8 +23,10 @@ namespace libperspesk
 				return Sw.Surface.get();
 		}
 
-		virtual void Resize(int width, int height) override
+		void FixSize()
 		{
+			int width, height;
+			GetPlatformWindowDimensions(hWnd, &width, &height);
 			if (Width == width && Height == height)
 				return;
 			Width = width;
@@ -61,6 +52,18 @@ namespace libperspesk
 			}
 		}
 
+		WindowRenderTarget(void* hWnd)
+			: SurfaceProps(SkSurfaceProps::kLegacyFontHost_InitType), Gl(hWnd, 1, 1)
+
+		{
+			this->hWnd = hWnd;
+			Width = 0, Height = 0;
+			Sw.Window = hWnd;
+			Sw.Setup();
+			IsGpu = false;
+
+			FixSize();
+		}
 
 		void Present()
 		{
@@ -95,6 +98,7 @@ namespace libperspesk
 
 		virtual RenderingContext* CreateRenderingContext() override
 		{
+			FixSize();
 			if (IsGpu)
 				Gl.MakeCurrent();
 			else
@@ -110,8 +114,8 @@ namespace libperspesk
 		}
 	};
 
-	extern RenderTarget* CreateRenderTarget(void* nativeHandle, int width, int height)
+	extern RenderTarget* CreateRenderTarget(void* nativeHandle)
 	{
-		return new WindowRenderTarget(nativeHandle, width, height);
+		return new WindowRenderTarget(nativeHandle);
 	}
 }
