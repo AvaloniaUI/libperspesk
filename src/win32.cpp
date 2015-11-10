@@ -21,7 +21,6 @@ namespace libperspesk
 
 	void SwViewport::PrepareToDraw() {
 	}
-	}
 
 	void SwViewport::DrawToWindow()
 	{
