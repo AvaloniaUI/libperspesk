@@ -70,5 +70,17 @@ namespace libperspesk {
 	}
 
 
+	extern void GetPlatformWindowDimensions(void* nativeHandle, int* width, int* height)
+	{
+		Window  root;
+		int x,y;
+		unsigned int border, w, h,  depth;
+
+		XGetGeometry(XDisp, (Drawable)nativeHandle, &root, &x, &y, &w, &h, &border, &depth);
+		*width = (int)w;
+		*height = (int)h;
+	}
+
+
 #endif
 }

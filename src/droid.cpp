@@ -25,6 +25,15 @@ namespace libperspesk
 	void SwViewport::Rezise(int width, int height)
 	{
 	}
+
+	extern void GetPlatformWindowDimensions(void* nativeHandle, int* width, int* height)
+	{
+		ANativeWindow* w = ANativeWindow_fromSurface(Jni, (jobject)nativeHandle);
+		VERBOSE("Got native window for measurements %p", w);
+		*width = ANativeWindow_getWidth(w);
+		*height = ANativeWindow_getHeight(w);
+		ANativeWindow_release(w);
+	}
 	void SwViewport::PrepareToDraw() {
 
 		NativeWindow = ANativeWindow_fromSurface(Jni, (jobject)Window);
