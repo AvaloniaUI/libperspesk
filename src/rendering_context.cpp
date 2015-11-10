@@ -19,7 +19,7 @@ namespace libperspesk {
 			{
 				Image = image;
 				IsGpu = false;
-				if (Context != nullptr)
+				if (Context != nullptr && Options[proForceSoftware] == nullptr)
 					Surface.reset(SkSurface::NewRenderTarget(Context, SkSurface::kNo_Budgeted, Image->Bitmap.info()));
 				if (Surface.get() != nullptr)
 					IsGpu = true;

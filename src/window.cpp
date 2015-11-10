@@ -49,9 +49,12 @@ namespace libperspesk
 			}
 
 			//Initialize
-			Gl.fWidth = width;
-			Gl.fHeight = height;
-			IsGpu = Gl.attach(0);
+			if (Options[proForceSoftware] == nullptr)
+			{
+				Gl.fWidth = width;
+				Gl.fHeight = height;
+				IsGpu = Gl.attach(0);
+			}
 			if (!IsGpu)
 			{
 				Sw.Rezise(width, height);

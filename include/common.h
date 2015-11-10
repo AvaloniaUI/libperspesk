@@ -85,6 +85,7 @@ namespace libperspesk
 #endif
 
 	};
+	extern void** Options;
 
 #ifdef __ANDROID__
 	extern JNIEnv *Jni;
@@ -120,7 +121,7 @@ namespace libperspesk
 	extern void RebuildFormattedText(FormattedText*txt);
 	extern void DestroyFormattedText(FormattedText* txt);
 	extern void DrawFormattedText(RenderingContext* ctx, PerspexBrush* brush, FormattedText* text, float x, float y);
-
+	extern void SetOption(PerspexRenderOption option, void* value);
 
 #ifdef DEFINE_METHOD_TABLE
 
@@ -193,6 +194,7 @@ namespace libperspesk
 		&RebuildFormattedText,
 		&DestroyFormattedText,
 		&DrawFormattedText,
+		&SetOption,
 		0
 	};
 

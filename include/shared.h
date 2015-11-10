@@ -86,6 +86,13 @@ namespace libperspesk {
 		SkRect*CharRects;
 	};
 
+	enum PerspexRenderOption
+	{
+		proForceSoftware = 0,
+
+		proMaxOption = 0
+	};
+
 	class BitmapContainer;
 
 #define PERSPEX_MAX_GRADIENT_STOPS 1024
