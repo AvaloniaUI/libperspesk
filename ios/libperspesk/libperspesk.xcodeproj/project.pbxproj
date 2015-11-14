@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB51F0B41BF685E300D45BF0 /* bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0A91BF685E300D45BF0 /* bitmap.cpp */; };
+		AB51F0B51BF685E300D45BF0 /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0AA1BF685E300D45BF0 /* buffer.cpp */; };
+		AB51F0B61BF685E300D45BF0 /* droid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0AB1BF685E300D45BF0 /* droid.cpp */; };
+		AB51F0B71BF685E300D45BF0 /* formatted_text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0AC1BF685E300D45BF0 /* formatted_text.cpp */; };
+		AB51F0B81BF685E300D45BF0 /* gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0AD1BF685E300D45BF0 /* gl.cpp */; };
+		AB51F0B91BF685E300D45BF0 /* linux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0AE1BF685E300D45BF0 /* linux.cpp */; };
+		AB51F0BA1BF685E300D45BF0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0AF1BF685E300D45BF0 /* main.cpp */; };
+		AB51F0BB1BF685E300D45BF0 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0B01BF685E300D45BF0 /* path.cpp */; };
+		AB51F0BC1BF685E300D45BF0 /* rendering_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0B11BF685E300D45BF0 /* rendering_context.cpp */; };
+		AB51F0BD1BF685E300D45BF0 /* win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0B21BF685E300D45BF0 /* win32.cpp */; };
+		AB51F0BE1BF685E300D45BF0 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0B31BF685E300D45BF0 /* window.cpp */; };
+		AB51F0CB1BF691D500D45BF0 /* pview.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB51F0CA1BF691D500D45BF0 /* pview.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB585EEE1BF67836004F14B3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB51F0A91BF685E300D45BF0 /* bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = bitmap.cpp; path = ../../src/bitmap.cpp; sourceTree = "<group>"; };
+		AB51F0AA1BF685E300D45BF0 /* buffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = buffer.cpp; path = ../../src/buffer.cpp; sourceTree = "<group>"; };
+		AB51F0AB1BF685E300D45BF0 /* droid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = droid.cpp; path = ../../src/droid.cpp; sourceTree = "<group>"; };
+		AB51F0AC1BF685E300D45BF0 /* formatted_text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = formatted_text.cpp; path = ../../src/formatted_text.cpp; sourceTree = "<group>"; };
+		AB51F0AD1BF685E300D45BF0 /* gl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gl.cpp; path = ../../src/gl.cpp; sourceTree = "<group>"; };
+		AB51F0AE1BF685E300D45BF0 /* linux.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = linux.cpp; path = ../../src/linux.cpp; sourceTree = "<group>"; };
+		AB51F0AF1BF685E300D45BF0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/main.cpp; sourceTree = "<group>"; };
+		AB51F0B01BF685E300D45BF0 /* path.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = ../../src/path.cpp; sourceTree = "<group>"; };
+		AB51F0B11BF685E300D45BF0 /* rendering_context.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = rendering_context.cpp; path = ../../src/rendering_context.cpp; sourceTree = "<group>"; };
+		AB51F0B21BF685E300D45BF0 /* win32.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = win32.cpp; path = ../../src/win32.cpp; sourceTree = "<group>"; };
+		AB51F0B31BF685E300D45BF0 /* window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = window.cpp; path = ../../src/window.cpp; sourceTree = "<group>"; };
+		AB51F0C01BF6866600D45BF0 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../../include; sourceTree = "<group>"; };
+		AB51F0CA1BF691D500D45BF0 /* pview.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = pview.mm; path = ../../src/pview.mm; sourceTree = "<group>"; };
+		AB585EF01BF67836004F14B3 /* liblibperspesk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibperspesk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB585EED1BF67836004F14B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB585EE71BF67836004F14B3 = {
+			isa = PBXGroup;
+			children = (
+				AB51F0CA1BF691D500D45BF0 /* pview.mm */,
+				AB51F0C01BF6866600D45BF0 /* include */,
+				AB51F0A91BF685E300D45BF0 /* bitmap.cpp */,
+				AB51F0AA1BF685E300D45BF0 /* buffer.cpp */,
+				AB51F0AB1BF685E300D45BF0 /* droid.cpp */,
+				AB51F0AC1BF685E300D45BF0 /* formatted_text.cpp */,
+				AB51F0AD1BF685E300D45BF0 /* gl.cpp */,
+				AB51F0AE1BF685E300D45BF0 /* linux.cpp */,
+				AB51F0AF1BF685E300D45BF0 /* main.cpp */,
+				AB51F0B01BF685E300D45BF0 /* path.cpp */,
+				AB51F0B11BF685E300D45BF0 /* rendering_context.cpp */,
+				AB51F0B21BF685E300D45BF0 /* win32.cpp */,
+				AB51F0B31BF685E300D45BF0 /* window.cpp */,
+				AB585EF11BF67836004F14B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB585EF11BF67836004F14B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB585EF01BF67836004F14B3 /* liblibperspesk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB585EEF1BF67836004F14B3 /* libperspesk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB585EF91BF67836004F14B3 /* Build configuration list for PBXNativeTarget "libperspesk" */;
+			buildPhases = (
+				AB585EEC1BF67836004F14B3 /* Sources */,
+				AB585EED1BF67836004F14B3 /* Frameworks */,
+				AB585EEE1BF67836004F14B3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libperspesk;
+			productName = libperspesk;
+			productReference = AB585EF01BF67836004F14B3 /* liblibperspesk.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB585EE81BF67836004F14B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Perspex;
+				TargetAttributes = {
+					AB585EEF1BF67836004F14B3 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = AB585EEB1BF67836004F14B3 /* Build configuration list for PBXProject "libperspesk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB585EE71BF67836004F14B3;
+			productRefGroup = AB585EF11BF67836004F14B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB585EEF1BF67836004F14B3 /* libperspesk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB585EEC1BF67836004F14B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB51F0B41BF685E300D45BF0 /* bitmap.cpp in Sources */,
+				AB51F0B51BF685E300D45BF0 /* buffer.cpp in Sources */,
+				AB51F0B61BF685E300D45BF0 /* droid.cpp in Sources */,
+				AB51F0B71BF685E300D45BF0 /* formatted_text.cpp in Sources */,
+				AB51F0B81BF685E300D45BF0 /* gl.cpp in Sources */,
+				AB51F0B91BF685E300D45BF0 /* linux.cpp in Sources */,
+				AB51F0BA1BF685E300D45BF0 /* main.cpp in Sources */,
+				AB51F0BB1BF685E300D45BF0 /* path.cpp in Sources */,
+				AB51F0BC1BF685E300D45BF0 /* rendering_context.cpp in Sources */,
+				AB51F0BD1BF685E300D45BF0 /* win32.cpp in Sources */,
+				AB51F0BE1BF685E300D45BF0 /* window.cpp in Sources */,
+				AB51F0CB1BF691D500D45BF0 /* pview.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AB585EF71BF67836004F14B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-I../../include",
+					"-I../../../skia/include/animator",
+					"-I../../../skia/include/c",
+					"-I../../../skia/include/codec",
+					"-I../../../skia/include/config",
+					"-I../../../skia/include/core",
+					"-I../../../skia/include/device",
+					"-I../../../skia/include/effects",
+					"-I../../../skia/include/gpu",
+					"-I../../../skia/include/images",
+					"-I../../../skia/include/pathops",
+					"-I../../../skia/include/pipe",
+					"-I../../../skia/include/ports",
+					"-I../../../skia/include/private",
+					"-I../../../skia/include/svg",
+					"-I../../../skia/include/utils",
+					"-I../../../skia/include/views",
+					"-I../../../skia/include/xml",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fpermissive",
+				);
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AB585EF81BF67836004F14B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-I../../include",
+					"-I../../../skia/include/core",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fpermissive",
+				);
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB585EFA1BF67836004F14B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AB585EFB1BF67836004F14B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB585EEB1BF67836004F14B3 /* Build configuration list for PBXProject "libperspesk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB585EF71BF67836004F14B3 /* Debug */,
+				AB585EF81BF67836004F14B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB585EF91BF67836004F14B3 /* Build configuration list for PBXNativeTarget "libperspesk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB585EFA1BF67836004F14B3 /* Debug */,
+				AB585EFB1BF67836004F14B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB585EE81BF67836004F14B3 /* Project object */;
+}

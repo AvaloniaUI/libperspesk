@@ -1,3 +1,4 @@
+#ifndef __APPLE__
 #include "pgl.h"
 #include "gl/GrGLInterface.h"
 
@@ -316,3 +317,4 @@ extern GrContext* CreatePlatformGrContext() {
 		fHeight = height;
 	}
 }
+#endif

@@ -1,0 +1,191 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "38FD5E1848089A0CB1998D68217368D6AA36E95E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "547A7CFBD5F0A850C99F405659B662B03DA54A62" : 0,
+    "25A8C58951724DEA988EE5C7DD40F05B3715D77C" : 0,
+    "CEFE192A302CA8A5D4D992D7FE00575ED5A1370A" : 0,
+    "9EB1437DD89612662DD568A907387B1CE6AFB9D9" : 0,
+    "5F1E077E697A00ED0C9B86CDA038754B2AB58B1E" : 0,
+    "E5CF499775057B0ADE0D85F68F04BF25E357B280" : 0,
+    "2341A6E9089AA6D83195DB6B0BF9825D2AE6B6D0" : 0,
+    "FED2EB7F28ED0A636261037451E211021CDF077E" : 0,
+    "F5F3EB7BADB4AD190EFBA78624D3D8CC615BB648" : 0,
+    "7B4C02F629726E58210A5B85281742FA34B1A2BB" : 0,
+    "236E8A741FA5693FD2EF3897C3459A258A1DDF54" : 0,
+    "38FD5E1848089A0CB1998D68217368D6AA36E95E" : 0,
+    "DB6AE43E3409DD3005ADFB1DAD8507CDB9EBE7FB" : 0,
+    "4D63B4CD856185B572902AF137DB93305F6BB3DA" : 0,
+    "1C40E86C1C06819F2AECFF89EBC2BD3C4AD1D0E1" : 0,
+    "2A510DB82E905F162553E8D3921EF2C3A10EBAA6" : 0,
+    "52A48B60B20C16BF17C218B40EC7BD81DB998CDB" : 0,
+    "23A02F409B908CC54A497686AC524C8557A05D34" : 0,
+    "006903EB7C5E464AEA2FA6204E3AEFE40C785572" : 0,
+    "5918FC96948B37173C21D1AAB318EA4403E909FA" : 0,
+    "98BE83CCF93C0AE7E08D40416959C0EA7C19F900" : 0,
+    "E9035F2323ED69E321F81F9D995AEAF1BD485B8D" : 0,
+    "C2B6146D481A9886A18E58088830B6004A4FEC37" : 0,
+    "272F684BDB48C12FB82F63EFB90FF2436BBA2473" : 0,
+    "45CC18FAE726F30BA4DBA97AD95247E33BC33EC3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "10903D9B-8BDE-4F0C-AE71-B9CD46662818",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "547A7CFBD5F0A850C99F405659B662B03DA54A62" : "skia\/third_party\/externals\/libpng\/",
+    "25A8C58951724DEA988EE5C7DD40F05B3715D77C" : "skia\/third_party\/externals\/giflib\/",
+    "CEFE192A302CA8A5D4D992D7FE00575ED5A1370A" : "skia\/third_party\/externals\/freetype\/",
+    "9EB1437DD89612662DD568A907387B1CE6AFB9D9" : "depot_tools\/",
+    "5F1E077E697A00ED0C9B86CDA038754B2AB58B1E" : "skia\/third_party\/externals\/angle2\/",
+    "E5CF499775057B0ADE0D85F68F04BF25E357B280" : "skia\/third_party\/externals\/libjpeg-turbo\/",
+    "2341A6E9089AA6D83195DB6B0BF9825D2AE6B6D0" : "skia\/third_party\/externals\/zlib\/",
+    "FED2EB7F28ED0A636261037451E211021CDF077E" : "skia\/third_party\/externals\/gyp\/",
+    "F5F3EB7BADB4AD190EFBA78624D3D8CC615BB648" : "skia\/third_party\/externals\/cmake\/",
+    "7B4C02F629726E58210A5B85281742FA34B1A2BB" : "skia\/platform_tools\/chromeos\/toolchain\/src\/third_party\/pyelftools\/",
+    "236E8A741FA5693FD2EF3897C3459A258A1DDF54" : "skia\/platform_tools\/chromeos\/toolchain\/src\/third_party\/chromite\/",
+    "38FD5E1848089A0CB1998D68217368D6AA36E95E" : "libperspesk\/",
+    "DB6AE43E3409DD3005ADFB1DAD8507CDB9EBE7FB" : "skia\/third_party\/externals\/jsoncpp\/",
+    "4D63B4CD856185B572902AF137DB93305F6BB3DA" : "skia\/common\/",
+    "1C40E86C1C06819F2AECFF89EBC2BD3C4AD1D0E1" : "skia\/third_party\/externals\/harfbuzz\/",
+    "2A510DB82E905F162553E8D3921EF2C3A10EBAA6" : "skia\/third_party\/externals\/icu\/",
+    "52A48B60B20C16BF17C218B40EC7BD81DB998CDB" : "skia\/third_party\/externals\/sdl\/",
+    "23A02F409B908CC54A497686AC524C8557A05D34" : "skia\/third_party\/externals\/sfntly\/",
+    "006903EB7C5E464AEA2FA6204E3AEFE40C785572" : "skia\/platform_tools\/android\/third_party\/externals\/expat\/",
+    "5918FC96948B37173C21D1AAB318EA4403E909FA" : "skia\/third_party\/externals\/nanomsg\/",
+    "98BE83CCF93C0AE7E08D40416959C0EA7C19F900" : "skia\/third_party\/externals\/yasm\/source\/patched-yasm\/",
+    "E9035F2323ED69E321F81F9D995AEAF1BD485B8D" : "skia\/",
+    "C2B6146D481A9886A18E58088830B6004A4FEC37" : "skia\/common\/third_party\/externals\/boto\/",
+    "272F684BDB48C12FB82F63EFB90FF2436BBA2473" : "skia\/third_party\/externals\/libwebp\/",
+    "45CC18FAE726F30BA4DBA97AD95247E33BC33EC3" : "skia\/third_party\/externals\/yasm\/binaries\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "skiatestapp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/skiatestapp\/skiatestapp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/android.googlesource.com\/platform\/external\/expat.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "006903EB7C5E464AEA2FA6204E3AEFE40C785572"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/third_party\/harfbuzz.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1C40E86C1C06819F2AECFF89EBC2BD3C4AD1D0E1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/src\/third_party\/zlib",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2341A6E9089AA6D83195DB6B0BF9825D2AE6B6D0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromiumos\/chromite.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "236E8A741FA5693FD2EF3897C3459A258A1DDF54"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/sfntly\/cpp\/src.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "23A02F409B908CC54A497686AC524C8557A05D34"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/android.googlesource.com\/platform\/external\/giflib.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "25A8C58951724DEA988EE5C7DD40F05B3715D77C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/webm\/libwebp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "272F684BDB48C12FB82F63EFB90FF2436BBA2473"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/icu.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2A510DB82E905F162553E8D3921EF2C3A10EBAA6"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Perspex\/libperspesk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "38FD5E1848089A0CB1998D68217368D6AA36E95E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/yasm\/binaries.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "45CC18FAE726F30BA4DBA97AD95247E33BC33EC3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/common.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4D63B4CD856185B572902AF137DB93305F6BB3DA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/third_party\/sdl",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "52A48B60B20C16BF17C218B40EC7BD81DB998CDB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/third_party\/libpng.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "547A7CFBD5F0A850C99F405659B662B03DA54A62"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/third_party\/nanomsg.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5918FC96948B37173C21D1AAB318EA4403E909FA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/angle\/angle.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5F1E077E697A00ED0C9B86CDA038754B2AB58B1E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromiumos\/third_party\/pyelftools.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7B4C02F629726E58210A5B85281742FA34B1A2BB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/yasm\/patched-yasm.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "98BE83CCF93C0AE7E08D40416959C0EA7C19F900"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/tools\/depot_tools.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9EB1437DD89612662DD568A907387B1CE6AFB9D9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/boto\/boto.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C2B6146D481A9886A18E58088830B6004A4FEC37"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/third_party\/freetype2.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CEFE192A302CA8A5D4D992D7FE00575ED5A1370A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/jsoncpp\/jsoncpp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DB6AE43E3409DD3005ADFB1DAD8507CDB9EBE7FB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/libjpeg_turbo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E5CF499775057B0ADE0D85F68F04BF25E357B280"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/skia.googlesource.com\/skia",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E9035F2323ED69E321F81F9D995AEAF1BD485B8D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/cmake.googlesource.com\/cmake.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5F3EB7BADB4AD190EFBA78624D3D8CC615BB648"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/gyp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FED2EB7F28ED0A636261037451E211021CDF077E"
+    }
+  ]
+}

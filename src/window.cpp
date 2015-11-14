@@ -1,3 +1,4 @@
+#ifndef __APPLE__
 #include "pgl.h"
 #include "GrGpuResource.h"
 
@@ -119,3 +120,5 @@ namespace libperspesk
 		return new WindowRenderTarget(nativeHandle);
 	}
 }
+
+#endif

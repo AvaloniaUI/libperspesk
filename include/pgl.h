@@ -1,9 +1,10 @@
 #include "common.h"
 #include "gl/GrGLInterface.h"
+#ifndef __APPLE__
 #include "EGL/egl.h"
 #include "EGL/eglplatform.h"
 #include "GLES2/gl2.h"
-
+#endif
 #include "gl/SkGLContext.h"
 
 #define GLIMP(proto, name) proto name = (proto)eglGetProcAddress(#name)
@@ -16,8 +17,10 @@ namespace libperspesk
 	{
 	public:
 		void* fWindow;
-		EGLSurface fSurface;
-		int fWidth;
+#ifndef __APPLE__
+        EGLSurface fSurface;
+#endif
+        int fWidth;
 		int fHeight;
 		int fSampleCount;
 		int fStencilBits;
