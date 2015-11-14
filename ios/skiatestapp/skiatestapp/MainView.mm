@@ -13,13 +13,17 @@
 #import "MainView.h"
 using namespace libperspesk;
 
+extern "C" void* GetPerspexMethodTable();
+
 @implementation MainView;
 
 - (id) init{
+    GetPerspexMethodTable();
     self = [super init];
-    _layer = [CALayer layer];
+    _layer = [CAEAGLLayer layer];
     _layer.bounds = CGRectMake(0., 0., 320., 480.);
-    //_layer.backgroundColor = [[UIColor redColor] CGColor];
+    _layer.backgroundColor = [[UIColor redColor] CGColor];
+    _color = 0;
     [self.layer addSublayer: _layer];
     return self;
 }
@@ -30,7 +34,7 @@ using namespace libperspesk;
     ctx->Settings.Opacity=1;
     PerspexBrush brush;
     memset(&brush, 0, sizeof(PerspexBrush));
-    brush.Color = 0xffff00ff;
+    brush.Color = 0xffff00ff ^ _color;
     brush.Opacity = 1;
     SkRect rc;
     rc.fLeft = rc.fTop = 0;
@@ -39,14 +43,26 @@ using namespace libperspesk;
     
     DrawRectangle(ctx, &brush, &rc, 0);
     rc.fLeft = 50;
-    rc.fTop = 150;
+    rc.fTop = 00;
     rc.fBottom = 200;
-    rc.fRight = 200;
-    brush.Color = 0xff00ff00;
+    rc.fRight = 270;
+    brush.Color = 0xff00ff00 ^ _color;
     DrawRectangle(ctx, &brush,  &rc, 10);
+    
+    rc.fLeft = 340;
+    rc.fRight = 400;
+    DrawRectangle(ctx, &brush,  &rc, 10);
+    
     delete ctx;
     delete target;
 }
+
+- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    _color = _color ^ 0xffffff;
+    [self draw];
+}
+
 @end
 
 @implementation MainViewController

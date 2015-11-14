@@ -12,6 +12,7 @@
 @interface MainView : UIView
 {
     CALayer* _layer;
+    unsigned int _color;
 }
 - (id) init;
 - (void) draw;
