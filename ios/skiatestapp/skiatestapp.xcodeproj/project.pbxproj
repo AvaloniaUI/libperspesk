@@ -308,18 +308,36 @@
 					"-I../../../skia/include/views",
 					"-I../../../skia/include/xml",
 				);
+				"OTHER_CFLAGS[arch=*]" = (
+					"-I../../include",
+					"-I../../../skia/include/animator",
+					"-I../../../skia/include/c",
+					"-I../../../skia/include/codec",
+					"-I../../../skia/include/config",
+					"-I../../../skia/include/core",
+					"-I../../../skia/include/device",
+					"-I../../../skia/include/effects",
+					"-I../../../skia/include/gpu",
+					"-I../../../skia/include/images",
+					"-I../../../skia/include/pathops",
+					"-I../../../skia/include/pipe",
+					"-I../../../skia/include/ports",
+					"-I../../../skia/include/private",
+					"-I../../../skia/include/svg",
+					"-I../../../skia/include/utils",
+					"-I../../../skia/include/views",
+					"-I../../../skia/include/xml",
+				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
-					"-L../../../skia/xcodebuild/Debug-iphonesimulator",
+					"-L../../../skia/xcodebuild/Release-iphonesimulator",
 					"-lSkKTX",
 					"-letc1",
 					"-lexperimental",
 					"-lflags",
 					"-lgiflib",
 					"-ljpeg-turbo",
-					"-ljsoncpp",
 					"-llua",
 					"-lpng_static",
-					"-lproc_stats",
 					"-lresources",
 					"-lsk_tool_utils",
 					"-lskia_animator",
@@ -361,7 +379,30 @@
 				INFOPLIST_FILE = skiatestapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "-I../../include";
+				OTHER_CFLAGS = (
+					"-I../../include",
+					"-I../../../skia/include/animator",
+					"-I../../../skia/include/c",
+					"-I../../../skia/include/codec",
+					"-I../../../skia/include/config",
+					"-I../../../skia/include/core",
+					"-I../../../skia/include/device",
+					"-I../../../skia/include/effects",
+					"-I../../../skia/include/gpu",
+					"-I../../../skia/include/images",
+					"-I../../../skia/include/pathops",
+					"-I../../../skia/include/pipe",
+					"-I../../../skia/include/ports",
+					"-I../../../skia/include/private",
+					"-I../../../skia/include/svg",
+					"-I../../../skia/include/utils",
+					"-I../../../skia/include/views",
+					"-I../../../skia/include/xml",
+				);
+				OTHER_LDFLAGS = (
+					"-L../build",
+					"-lskia",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = perspex.ui.skiatestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

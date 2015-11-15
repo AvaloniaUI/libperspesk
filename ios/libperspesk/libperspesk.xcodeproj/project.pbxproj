@@ -278,6 +278,7 @@
 		AB585EFA1BF67836004F14B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -287,6 +288,27 @@
 		AB585EFB1BF67836004F14B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = (
+					"-I../../include",
+					"-I../../../skia/include/animator",
+					"-I../../../skia/include/c",
+					"-I../../../skia/include/codec",
+					"-I../../../skia/include/config",
+					"-I../../../skia/include/core",
+					"-I../../../skia/include/device",
+					"-I../../../skia/include/effects",
+					"-I../../../skia/include/gpu",
+					"-I../../../skia/include/images",
+					"-I../../../skia/include/pathops",
+					"-I../../../skia/include/pipe",
+					"-I../../../skia/include/ports",
+					"-I../../../skia/include/private",
+					"-I../../../skia/include/svg",
+					"-I../../../skia/include/utils",
+					"-I../../../skia/include/views",
+					"-I../../../skia/include/xml",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

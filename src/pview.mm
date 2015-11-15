@@ -12,9 +12,22 @@ namespace libperspesk
 {
     static EAGLContext* GlContext;
     static GLuint Framebuffer, RenderBuffer, StencilBuffer;
+
+    int SkForceLinking(bool doNotPassTrue) {
+        if (doNotPassTrue) {
+            SkASSERT(false);
+            CreateJPEGImageDecoder();
+            CreateBMPImageDecoder();
+            CreatePNGImageEncoder_IOS();
+            return -1;
+        }
+        return 0;
+    }
+
     
     extern GrContext*CreatePlatformGrContext()
     {
+        SkForceLinking(true);
         GlContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         [EAGLContext setCurrentContext:GlContext];
         glGenFramebuffers(1, &Framebuffer);
