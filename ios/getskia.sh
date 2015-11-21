@@ -1,7 +1,7 @@
 source ./env
 cd ../..
 git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git'
-git clone 'https://github.com/Perspex/skia
+git clone 'https://github.com/Perspex/skia'
 set -e
 cd skia
 git checkout perspex

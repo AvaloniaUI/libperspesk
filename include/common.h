@@ -89,6 +89,9 @@ namespace libperspesk
 #ifdef __ANDROID__
 	extern JNIEnv *Jni;
 #endif
+#ifdef __APPLE__
+    extern "C" void* GetPerspexEAGLContext();
+#endif
 #ifdef USE_VERBOSE
 #define VERBOSE(...) SkDebugf(__VA_ARGS__)
 #else

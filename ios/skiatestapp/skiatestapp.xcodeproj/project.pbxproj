@@ -286,6 +286,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = skiatestapp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (
@@ -327,6 +328,42 @@
 					"-I../../../skia/include/utils",
 					"-I../../../skia/include/views",
 					"-I../../../skia/include/xml",
+				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-L../../../skia/xcodebuild/Release-iphoneos",
+					"-lSkKTX",
+					"-letc1",
+					"-lexperimental",
+					"-lflags",
+					"-lgiflib",
+					"-ljpeg-turbo",
+					"-llua",
+					"-lpng_static",
+					"-lresources",
+					"-lsk_tool_utils",
+					"-lskia_animator",
+					"-lskia_codec",
+					"-lskia_core",
+					"-lskia_effects",
+					"-lskia_images",
+					"-lskia_opts",
+					"-lskia_pdf",
+					"-lskia_ports",
+					"-lskia_sfnt",
+					"-lskia_skgpu",
+					"-lskia_skgputest",
+					"-lskia_utils",
+					"-lskia_views",
+					"-lskia_xml",
+					"-ltimer",
+					"-lviews_animated",
+					"-lwebp_dec",
+					"-lwebp_demux",
+					"-lwebp_dsp",
+					"-lwebp_dsp_enc",
+					"-lwebp_dsp_neon",
+					"-lwebp_enc",
+					"-lwebp_utils",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"-L../../../skia/xcodebuild/Release-iphonesimulator",
@@ -377,6 +414,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = skiatestapp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (

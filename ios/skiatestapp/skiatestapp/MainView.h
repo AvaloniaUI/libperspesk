@@ -8,14 +8,13 @@
 
 #ifndef MainView_h
 #define MainView_h
+#import <GLKit/GLKView.h>
 
-@interface MainView : UIView
+@interface MainView : GLKView
 {
-    CALayer* _layer;
     unsigned int _color;
 }
 - (id) init;
-- (void) draw;
 
 @end
 

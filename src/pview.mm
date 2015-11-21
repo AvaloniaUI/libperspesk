@@ -3,7 +3,7 @@
 #import "UIKit/UIKit.h"
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
-
+#import "GLKit/GLKView.h"
 #define SKGL_CONFIG kEAGLColorFormatRGBA8
 
 
@@ -23,7 +23,10 @@ namespace libperspesk
         }
         return 0;
     }
-
+    extern "C" void* GetPerspexEAGLContext(){
+        return (void*)CFBridgingRetain(GlContext);
+    }
+    
     
     extern GrContext*CreatePlatformGrContext()
     {
@@ -48,53 +51,20 @@ namespace libperspesk
     class MacRenderTarget : public RenderTarget
     {
     public:
-        CAEAGLLayer*Layer;
-        SkBitmap Bitmap;
+        GLKView* View;
         SkAutoTUnref<SkSurface> Surface;
-        int Width, Height;
         MacRenderTarget(void*nativeWindow)
         {
-            Layer = (CAEAGLLayer*)CFBridgingRelease(nativeWindow);
-            Layer.opaque = true;
-            Layer.anchorPoint = CGPointMake(0,0);
-            Width=Height=0;
-            Layer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [NSNumber numberWithBool:NO],
-                                   kEAGLDrawablePropertyRetainedBacking,
-                                   SKGL_CONFIG,
-                                   kEAGLDrawablePropertyColorFormat,nil];
         }
         
-        void ResetContext()
+        void Prepare()
         {
-            [EAGLContext setCurrentContext:GlContext];
-            glBindFramebuffer(GL_FRAMEBUFFER, Framebuffer);
-            glBindRenderbuffer(GL_RENDERBUFFER, RenderBuffer);
-        }
-        
-        void Resize()
-        {
-            float scale = [UIScreen mainScreen].scale;
-            Layer.contentsScale = scale;
-            int w = Layer.bounds.size.width *scale;
-            int h = Layer.bounds.size.height *scale;
-            
-            if(w<1)
-                w=1;
-            if(h<1)
-                h=1;
-            if(Width != w || Height != h)
-            {
-                Width = w;
-                Height =h;
-            }
+            GLint w, h;
+            glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &w);
+            glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &h);
             
             GrBackendRenderTargetDesc desc;
-            ResetContext();
-            
-            glBindRenderbuffer(GL_RENDERBUFFER, StencilBuffer);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, Width, Height);
-            
+
             glGetRenderbufferParameteriv(GL_RENDERBUFFER,
                                  GL_RENDERBUFFER_STENCIL_SIZE,
                                  &desc.fStencilBits);
@@ -102,35 +72,25 @@ namespace libperspesk
                                  GL_RENDERBUFFER_SAMPLES_APPLE,
                                  &desc.fSampleCnt);
             
-            glBindRenderbuffer(GL_RENDERBUFFER, RenderBuffer);
-            [GlContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:Layer];
-            
+            GLint fb;
+            glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING_APPLE, &fb);
+            desc.fRenderTargetHandle = fb;
             desc.fWidth = SkScalarRoundToInt(w);
             desc.fHeight = SkScalarRoundToInt(h);
             desc.fConfig = kSkia8888_GrPixelConfig;
-            desc.fRenderTargetHandle = Framebuffer;
             desc.fOrigin = GrSurfaceOrigin::kBottomLeft_GrSurfaceOrigin;
 
             
             SkAutoTUnref<GrRenderTarget> target(Context->textureProvider()->wrapBackendRenderTarget(desc));
             Surface.reset(SkSurface::NewRenderTargetDirect(target));
             
-            /*
-            Bitmap.allocN32Pixels(Width, Height);
-            Surface.reset(SkSurface::NewRasterDirect(Bitmap.info(), Bitmap.getPixels(), Bitmap.rowBytes()));*/
+            glDisable(GL_SCISSOR_TEST);
+            glClearColor(0,0,0,0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glClearStencil(0);
+            glClearColor(0, 255, 0, 0);
+            glViewport(0, 0, w, h);
         }
-        
-        void Present()
-        {
-            ResetContext();
-            [GlContext presentRenderbuffer:GL_RENDERBUFFER];
-
-            /*
-            CGImageRef img = SkCreateCGImageRef(Bitmap);
-            Layer.contents = (__bridge id)img;
-            CGImageRelease(img);*/
-        }
-        
         
         class MacRenderingContext : public RenderingContext
         {
@@ -148,25 +108,12 @@ namespace libperspesk
             ~MacRenderingContext()
             {
                 Canvas->flush();
-                Target->Present();
             }
-            
-            
         };
         
         RenderingContext*CreateRenderingContext()
         {
-            Resize();
-            ResetContext();
-            glDisable(GL_SCISSOR_TEST);
-            glClearColor(0,0,0,0);
-            glClear(GL_COLOR_BUFFER_BIT);
-            glClearStencil(0);
-            glClearColor(0, 255, 0, 0);
-            glViewport(0, 0, Width, Height);
-            
-            
-
+            Prepare();
             return new MacRenderingContext(this);
         };
     };
