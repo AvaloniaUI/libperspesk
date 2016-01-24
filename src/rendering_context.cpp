@@ -167,18 +167,19 @@ namespace libperspesk {
 		ctx->Canvas->drawLine(x1, y1, x2, y2, CreatePaint(ctx, brush));
 	}
 
-	static void DrawGeometry(RenderingContext*ctx, SkPath*path, PerspexBrush*brush)
+	static void DrawGeometry(RenderingContext*ctx, SkPath*path, PerspexBrush*brush, bool useEvenOdd)
 	{
 		SkPaint pt = CreatePaint(ctx, brush);
+		path->setFillType(useEvenOdd ? SkPath::FillType::kEvenOdd_FillType : SkPath::FillType::kWinding_FillType);
 		ctx->Canvas->drawPath(*path, pt);
 	}
 
-	extern void DrawGeometry(RenderingContext*ctx, SkPath*path, PerspexBrush*fill, PerspexBrush* stroke)
+	extern void DrawGeometry(RenderingContext*ctx, SkPath*path, PerspexBrush*fill, PerspexBrush* stroke, bool useEvenOdd)
 	{
 		if (fill != nullptr)
-			DrawGeometry(ctx, path, fill);
+			DrawGeometry(ctx, path, fill, useEvenOdd);
 		if (stroke != nullptr)
-			DrawGeometry(ctx, path, stroke);
+			DrawGeometry(ctx, path, stroke, false);
 	}
 
 	extern bool LoadImage(void*pData, int len, BitmapContainer**pImage, int* width, int* height)
