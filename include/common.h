@@ -112,7 +112,7 @@ namespace libperspesk
 	extern void DrawLine(RenderingContext*ctx, PerspexBrush*brush, float x1, float y1, float x2, float y2);
 	extern SkPath* CreatePath(PerspexGeometryElement* elements, int count, SkRect* bounds);
 	extern void DisposePath(SkPath*path);
-	extern void DrawGeometry(RenderingContext*ctx, SkPath*path, PerspexBrush*fill, PerspexBrush* stroke);
+	extern void DrawGeometry(RenderingContext*ctx, SkPath*path, PerspexBrush*fill, PerspexBrush* stroke, bool useEvenOdd);
 	extern bool LoadImage(void*pData, int len, BitmapContainer**pImage, int* width, int* height);
 	extern SkData* SaveImage(BitmapContainer*pImage, PerspexImageType ptype, int quality);
 	extern void DrawImage(RenderingContext*ctx, BitmapContainer*image, float opacity, SkRect* srcRect, SkRect*destRect);
