@@ -6,8 +6,29 @@
 namespace libperspesk {
 	class BitmapContainer : public RenderTarget
 	{
-	public:
+	private:
 		SkBitmap Bitmap;
+	public:
+		
+		SkAutoTUnref<SkImage> Image;
+		int Width, Height;
+
+
+		BitmapContainer(SkBitmap& bitmap)
+		{
+			Bitmap = bitmap;
+			Image.reset(SkImage::NewFromBitmap(bitmap));
+			Width = bitmap.width();
+			Height = bitmap.height();
+		}
+
+		BitmapContainer(int width, int height)
+		{
+			Bitmap.allocN32Pixels(1, 1);
+			Image.reset(SkImage::NewFromBitmap(Bitmap));
+			Width = width;
+			Height = height;
+		}
 
 		class ImageRenderingContext : public RenderingContext
 		{
@@ -20,16 +41,17 @@ namespace libperspesk {
 				Image = image;
 				IsGpu = false;
 				if (Context != nullptr && Options[proForceSoftware] == nullptr)
-					Surface.reset(SkSurface::NewRenderTarget(Context, SkSurface::kNo_Budgeted, Image->Bitmap.info()));
+					Surface.reset(SkSurface::NewRenderTarget(Context, SkSurface::kNo_Budgeted, SkImageInfo::MakeN32(Image->Width, Image->Height, kOpaque_SkAlphaType)));
 				if (Surface.get() != nullptr)
 					IsGpu = true;
 				else
 				{
+					if (Image->Bitmap.width() != Image->Width || Image->Bitmap.height() != Image->Height)
+						Image->Bitmap.allocN32Pixels(Image->Width, Image->Height);
 					Surface.reset(SkSurface::NewRasterDirect(image->Bitmap.info(), image->Bitmap.getPixels(), image->Bitmap.rowBytes()));
 				}
 				
 				Surface.reset(SkSurface::NewRasterDirect(image->Bitmap.info(), image->Bitmap.getPixels(), image->Bitmap.rowBytes()));
-
 				Canvas = Surface->getCanvas();
 				Canvas->clear(SkColor());
 			}
@@ -38,9 +60,11 @@ namespace libperspesk {
 			{
 				if (IsGpu)
 				{
-					SkAutoTUnref<SkImage> image;
-					image.reset(Surface->newImageSnapshot(SkSurface::kNo_Budgeted));
-					image.get()->readPixels(Image->Bitmap.info(), Image->Bitmap.getPixels(), Image->Bitmap.rowBytes(), 0, 0);
+					Image->Image.reset(Surface->newImageSnapshot(SkSurface::kNo_Budgeted));
+				}
+				else
+				{
+					Image->Image.reset(SkImage::NewFromBitmap(Image->Bitmap));
 				}
 				Surface.reset(nullptr);
 			}
@@ -117,8 +141,7 @@ namespace libperspesk {
 				: (brush->BitmapTileMode == ptmFlipX || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode;
 			SkShader::TileMode tileY = brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
 				: (brush->BitmapTileMode == ptmFlipY || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode;
-			
-			paint.setShader(SkShader::CreateBitmapShader(brush->Bitmap->Bitmap, tileX, tileY, &matrix))->unref();
+			paint.setShader(brush->Bitmap->Image->newShader(tileX, tileY, &matrix))->unref();
 		}
 
 		double opacity = brush->Opacity * ctx->Settings.Opacity;
@@ -184,16 +207,16 @@ namespace libperspesk {
 
 	extern bool LoadImage(void*pData, int len, BitmapContainer**pImage, int* width, int* height)
 	{
-		BitmapContainer*img = new BitmapContainer();
-		if (!SkImageDecoder::DecodeMemory(pData, len, &img->Bitmap))
+		SkBitmap bitmap;
+		if (!SkImageDecoder::DecodeMemory(pData, len, &bitmap))
 		{
-			delete img;
 			return false;
 		}
+
+		BitmapContainer*img = new BitmapContainer(bitmap);
 		*pImage = img;
-		*width = img->Bitmap.width();
-		*height = img->Bitmap.height();
-		SkCanvas*wat;
+		*width = bitmap.width();
+		*height = bitmap.height();
 		return true;
 	}
 
@@ -206,8 +229,13 @@ namespace libperspesk {
 			type = SkImageEncoder::kGIF_Type;
 		if (ptype == PerspexImageType::piJpeg)
 			type = SkImageEncoder::kJPEG_Type;
-
-		return SkImageEncoder::EncodeData(pImage->Bitmap, type, quality);
+		SkData*rv = pImage->Image->encode(type, quality);
+		if (rv != nullptr)
+			return rv;
+		SkBitmap bmp;
+		bmp.allocN32Pixels(pImage->Image->width(), pImage->Image->height());
+		pImage->Image->readPixels(bmp.info(), bmp.getPixels(), bmp.rowBytes(), 0, 0);
+		SkImageEncoder::EncodeData(bmp, type, quality);
 	}
 
 	extern void DrawImage(RenderingContext*ctx, BitmapContainer*image, float opacity, SkRect* srcRect, SkRect*destRect)
@@ -215,13 +243,12 @@ namespace libperspesk {
 		SkCanvas* c = ctx->Canvas;
 		SkPaint paint;
 		paint.setColor(SkColorSetARGB(ctx->Settings.Opacity* opacity * 255, 255, 255, 255));
-		ctx->Canvas->drawBitmapRect(image->Bitmap, *srcRect, *destRect, &paint);
+		ctx->Canvas->drawImageRect(image->Image, *srcRect, *destRect, &paint);
 	}
 
 	extern BitmapContainer* CreateRenderTargetBitmap(int width, int height)
 	{
-		BitmapContainer*rv = new BitmapContainer();
-		rv->Bitmap.allocN32Pixels(width, height);
+		BitmapContainer*rv = new BitmapContainer(width, height);
 		return rv;
 	}
 
