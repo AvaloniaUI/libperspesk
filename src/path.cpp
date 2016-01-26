@@ -27,6 +27,13 @@ namespace libperspesk
 		return rv;
 	}
 
+	extern SkPath* TransformPath(SkPath*path, float*m)
+	{
+		SkPath*rv = new SkPath();
+		path->transform(ConvertPerspexMatrix(m), rv);
+		return rv;
+	}
+
 	extern void DisposePath(SkPath*path)
 	{
 		delete path;

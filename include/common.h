@@ -63,6 +63,12 @@ namespace libperspesk
 		virtual ~RenderTarget() {}
 	};
 
+	static inline SkMatrix ConvertPerspexMatrix(float*m)
+	{
+		SkMatrix matrix;
+		matrix.setAll(m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1);
+		return matrix;
+	}
 
 	class SwViewport
 	{
@@ -124,6 +130,7 @@ namespace libperspesk
 	extern void DestroyFormattedText(FormattedText* txt);
 	extern void DrawFormattedText(RenderingContext* ctx, PerspexBrush* brush, FormattedText* text, float x, float y);
 	extern void SetOption(PerspexRenderOption option, void* value);
+	extern SkPath* TransformPath(SkPath*path, float*m);
 
 #ifdef DEFINE_METHOD_TABLE
 
@@ -190,6 +197,7 @@ namespace libperspesk
 		(void*)&DestroyFormattedText,
 		(void*)&DrawFormattedText,
 		(void*)&SetOption,
+		(void*)&TransformPath,
 		0
 	};
 

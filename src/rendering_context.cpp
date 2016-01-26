@@ -159,7 +159,7 @@ namespace libperspesk {
 		SkMatrix matrix;
 		matrix.setAll(m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1);
 
-		ctx->Canvas->setMatrix(matrix);
+		ctx->Canvas->setMatrix(ConvertPerspexMatrix(m));
 	}
 
 	extern void DrawLine(RenderingContext*ctx, PerspexBrush*brush, float x1, float y1, float x2, float y2)
